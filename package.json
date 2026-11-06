@@ -1,0 +1,17 @@
+{
+  "name": "alfela-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page ALFELA · Autobronceador Duna",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --watch",
+    "images": "node scripts/optimize-images.mjs",
+    "dev": "npx serve .",
+    "build": "npm run build:css && node scripts/build.mjs"
+  },
+  "devDependencies": {
+    "sharp": "0.33.5",
+    "tailwindcss": "3.4.17"
+  }
+}

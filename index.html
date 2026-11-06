@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- ===================================================== SEO ========== -->
+  <title>Alfela | Autobronceador Duna – Bronceado dorado sin sol</title>
+  <meta name="description" content="Duna de Alfela: crema autobronceadora progresiva con DHA y aloe vera para un bronceado dorado de apariencia natural, sin exponerte al sol. Envíos a toda Colombia.">
+  <meta name="theme-color" content="#003B5E">
+  <!-- PLACEHOLDER [TU-DOMINIO]: reemplazar por la URL final (p. ej. https://alfela.co) -->
+  <link rel="canonical" href="https://[TU-DOMINIO]/">
+
+  <!-- Open Graph / redes sociales (las URL de og:image deben ser absolutas) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="Alfela">
+  <meta property="og:title" content="Alfela | Autobronceador Duna – Bronceado dorado sin sol">
+  <meta property="og:description" content="Ese tono dorado que tanto te gusta, sin exponerte al sol. Crema autobronceadora progresiva con DHA y aloe vera.">
+  <meta property="og:url" content="https://[TU-DOMINIO]/">
+  <meta property="og:image" content="https://[TU-DOMINIO]/assets/img/og-hero.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Frasco de autobronceador Duna de Alfela sobre arena dorada frente al mar Caribe">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- ================================================== Fuentes ========= -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&display=swap">
+
+  <!-- Imagen del hero: precarga según dispositivo (LCP) -->
+  <link rel="preload" as="image" href="assets/img/m-hero.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/img/d-hero.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Sprite de íconos (Material Symbols, Apache 2.0) — en Shopify pasa a snippets/icon-sprite.liquid -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-add_shopping_cart" viewBox="0 -960 960 960"><path d="M440-600v-120H320v-80h120v-120h80v120h120v80H520v120h-80ZM223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM40-800v-80h131l170 360h280l156-280h91L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68.5-39t-1.5-79l54-98-144-304H40Z"/></symbol>
+    <symbol id="i-arrow_forward" viewBox="0 -960 960 960"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></symbol>
+    <symbol id="i-auto_fix_high" viewBox="0 -960 960 960"><path d="m800-680-38-82-82-38 82-38 38-82 38 82 82 38-82 38-38 82Zm-460 0-38-82-82-38 82-38 38-82 38 82 82 38-82 38-38 82Zm460 460-38-82-82-38 82-38 38-82 38 82 82 38-82 38-38 82ZM204-92 92-204q-12-12-12-29t12-29l446-446q12-12 29-12t29 12l112 112q12 12 12 29t-12 29L262-92q-12 12-29 12t-29-12Zm30-84 286-288-56-56-288 286 58 58Z"/></symbol>
+    <symbol id="i-chat" viewBox="0 -960 960 960"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></symbol>
+    <symbol id="i-check" viewBox="0 -960 960 960"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></symbol>
+    <symbol id="i-close" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></symbol>
+    <symbol id="i-cruelty_free" viewBox="0 -960 960 960"><path d="M380-80q-75 0-127.5-52.5T200-260q0-35 17-64.5t63-75.5q6-6 11.5-12.5T306-430q-51-78-78.5-163.5T200-760q0-58 21-89t59-31q57 0 102 55t68 101q9 20 16.5 40.5T480-641q6-22 13.5-42.5T511-724q22-46 67-101t102-55q38 0 59 31t21 89q0 81-27.5 166.5T654-430q9 11 14.5 17.5T680-400q46 46 63 75.5t17 64.5q0 75-52.5 127.5T580-80q-45 0-72.5-10L480-100l-27.5 10Q425-80 380-80Zm0-80q23 0 46-5.5t43-16.5q-11-5-20-17t-9-21q0-8 11.5-14t28.5-6q17 0 28.5 6t11.5 14q0 9-9 21t-20 17q20 11 43 16.5t46 5.5q42 0 71-29t29-71q0-18-10-35t-30-34q-14-12-23-21t-29-34q-29-35-48-45.5T480-440q-41 0-60.5 10.5T372-384q-20 25-29 34t-23 21q-20 17-30 34t-10 35q0 42 29 71t71 29Zm40-130q-8 0-14-9t-6-21q0-12 6-21t14-9q8 0 14 9t6 21q0 12-6 21t-14 9Zm120 0q-8 0-14-9t-6-21q0-12 6-21t14-9q8 0 14 9t6 21q0 12-6 21t-14 9ZM363-489q11-8 25-14t31-11q-2-48-14.5-95.5T373-696q-19-40-42-67.5T285-799q-2 6-3.5 15.5T280-760q0 68 21.5 138T363-489Zm234 0q40-63 61.5-133T680-760q0-14-1.5-23.5T675-799q-23 8-46 35.5T587-696q-18 39-30.5 86.5T541-514q15 4 29 10.5t27 14.5Z"/></symbol>
+    <symbol id="i-light_mode-fill" viewBox="0 -960 960 960"><path d="M338.5-338.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></symbol>
+    <symbol id="i-local_shipping" viewBox="0 -960 960 960"><path d="M155-195q-35-35-35-85H40v-440q0-33 23.5-56.5T120-800h560v160h120l120 160v200h-80q0 50-35 85t-85 35q-50 0-85-35t-35-85H360q0 50-35 85t-85 35q-50 0-85-35Zm113.5-56.5Q280-263 280-280t-11.5-28.5Q257-320 240-320t-28.5 11.5Q200-297 200-280t11.5 28.5Q223-240 240-240t28.5-11.5ZM120-360h32q17-18 39-29t49-11q27 0 49 11t39 29h272v-360H120v360Zm628.5 108.5Q760-263 760-280t-11.5-28.5Q737-320 720-320t-28.5 11.5Q680-297 680-280t11.5 28.5Q703-240 720-240t28.5-11.5ZM680-440h170l-90-120h-80v120ZM360-540Z"/></symbol>
+    <symbol id="i-lock" viewBox="0 -960 960 960"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm296.5-143.5Q560-327 560-360t-23.5-56.5Q513-440 480-440t-56.5 23.5Q400-393 400-360t23.5 56.5Q447-280 480-280t56.5-23.5ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 -960 960 960"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 -960 960 960"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></symbol>
+    <symbol id="i-photo_camera" viewBox="0 -960 960 960"><path d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"/></symbol>
+    <symbol id="i-shopping_bag" viewBox="0 -960 960 960"><path d="M240-80q-33 0-56.5-23.5T160-160v-480q0-33 23.5-56.5T240-720h80q0-66 47-113t113-47q66 0 113 47t47 113h80q33 0 56.5 23.5T800-640v480q0 33-23.5 56.5T720-80H240Zm0-80h480v-480h-80v80q0 17-11.5 28.5T600-520q-17 0-28.5-11.5T560-560v-80H400v80q0 17-11.5 28.5T360-520q-17 0-28.5-11.5T320-560v-80h-80v480Zm160-560h160q0-33-23.5-56.5T480-800q-33 0-56.5 23.5T400-720ZM240-160v-480 480Z"/></symbol>
+    <symbol id="i-spa-fill" viewBox="0 -960 960 960"><path d="M480-80q-94-12-168-48t-125.5-94Q135-280 108-356.5T81-526q110 11 186 40t123.5 82Q438-351 459-271.5T480-80Zm0-337q-23-35-62.5-69T326-548q6-42 20-87t34-88.5q20-43.5 45.5-83.5t54.5-73q29 33 54.5 73t45.5 83.5q20 43.5 34 88.5t20 87q-52 27-91.5 61T480-417Zm80 321q-2-70-10.5-129.5T523-338q47-81 129.5-132T879-526q1 158-84.5 272.5T560-96Z"/></symbol>
+    <symbol id="i-spa" viewBox="0 -960 960 960"><path d="M480-80q-73-9-145-39.5T206.5-207Q150-264 115-351T80-560v-40h40q51 0 105 13t101 39q12-86 54.5-176.5T480-880q57 65 99.5 155.5T634-548q47-26 101-39t105-13h40v40q0 122-35 209t-91.5 144q-56.5 57-128 87.5T480-80Zm-2-82q-11-166-98.5-251T162-518q11 171 101.5 255T478-162Zm2-254q15-22 36.5-45.5T558-502q-2-57-22.5-119T480-742q-35 59-55.5 121T402-502q20 17 42 40.5t36 45.5Zm78 236q37-12 77-35t74.5-62.5q34.5-39.5 59-98.5T798-518q-94 14-165 62.5T524-332q12 32 20.5 70t13.5 82Zm-78-236Zm78 236Zm-80 18Zm46-170ZM480-80Z"/></symbol>
+    <symbol id="i-star-fill" viewBox="0 -960 960 960"><path d="m233-120 65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z"/></symbol>
+    <symbol id="i-verified" viewBox="0 -960 960 960"><path d="m344-60-76-128-144-32 14-148-98-112 98-112-14-148 144-32 76-128 136 58 136-58 76 128 144 32-14 148 98 112-98 112 14 148-144 32-76 128-136-58-136 58Zm34-102 102-44 104 44 56-96 110-26-10-112 74-84-74-86 10-112-110-24-58-96-102 44-104-44-56 96-110 24 10 112-74 86 74 84-10 114 110 24 58 96Zm102-318Zm-42 142 226-226-56-58-170 170-86-84-56 56 142 142Z"/></symbol>
+    <symbol id="i-wb_sunny-fill" viewBox="0 -960 960 960"><path d="M440-800v-120h80v120h-80Zm0 760v-120h80v120h-80Zm360-400v-80h120v80H800Zm-760 0v-80h120v80H40Zm708-252-56-56 70-72 58 58-72 70ZM198-140l-58-58 72-70 56 56-70 72Zm564 0-70-72 56-56 72 70-58 58ZM212-692l-72-70 58-58 70 72-56 56Zm98 382q-70-70-70-170t70-170q70-70 170-70t170 70q70 70 70 170t-70 170q-70 70-170 70t-170-70Z"/></symbol>
+    <symbol id="i-wb_sunny" viewBox="0 -960 960 960"><path d="M440-800v-120h80v120h-80Zm0 760v-120h80v120h-80Zm360-400v-80h120v80H800Zm-760 0v-80h120v80H40Zm708-252-56-56 70-72 58 58-72 70ZM198-140l-58-58 72-70 56 56-70 72Zm564 0-70-72 56-56 72 70-58 58ZM212-692l-72-70 58-58 70 72-56 56Zm98 382q-70-70-70-170t70-170q70-70 170-70t170 70q70 70 70 170t-70 170q-70 70-170 70t-170-70Zm283.5-56.5Q640-413 640-480t-46.5-113.5Q547-640 480-640t-113.5 46.5Q320-547 320-480t46.5 113.5Q413-320 480-320t113.5-46.5ZM480-480Z"/></symbol>
+  </svg>
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-navy focus:px-5 focus:py-3 focus:text-white">Saltar al contenido</a>
+
+  <!-- ====================================================================
+       BARRA DE ANUNCIO + HEADER (#inicio)
+       ==================================================================== -->
+  <!-- Barra de anuncio (se desplaza con la página; el header queda fijo) -->
+  <div id="inicio" class="bg-navy px-4 py-1.5 text-center text-white md:py-2">
+    <p class="text-balance font-sans text-[11px] font-bold uppercase leading-4 tracking-[0.12em] md:text-eyebrow md:tracking-[0.18em]">Envíos a toda Colombia · Bronceado dorado sin sol</p>
+  </div>
+
+  <header class="sticky top-0 z-50 shadow-header">
+    <div class="bg-cream/95 backdrop-blur-md">
+      <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 md:h-20 md:px-6">
+        <!-- Botón hamburguesa (móvil) -->
+        <!-- Los dos íconos se superponen y el CSS cruza menú ↔ cerrar según aria-expanded -->
+        <button id="menu-toggle" type="button" class="menu-toggle pressable -ml-1.5 grid h-11 w-11 place-items-center rounded-full text-navy hover:bg-sand md:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="icon menu-toggle__open text-[24px]" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg>
+          <svg class="icon menu-toggle__close text-[24px]" aria-hidden="true" focusable="false"><use href="#i-close"/></svg>
+        </button>
+
+        <!-- Logo -->
+        <a href="#inicio" class="group flex items-center gap-2.5 rounded-full" aria-label="Alfela, ir al inicio">
+          <svg class="icon hidden text-2xl text-gold transition-transform group-hover:scale-105 md:inline-block" aria-hidden="true" focusable="false"><use href="#i-cruelty_free"/></svg>
+          <span class="font-serif text-headline-md italic leading-none tracking-tight text-navy md:text-headline-lg md:leading-none">Alfela</span>
+        </a>
+
+        <!-- Navegación desktop -->
+        <nav class="hidden items-center gap-1 md:flex lg:gap-2" aria-label="Principal">
+          <a class="nav-link" href="#productos" data-spy="productos">Productos</a>
+          <a class="nav-link" href="#tan" data-spy="tan">Bikini adhesivo</a>
+          <a class="nav-link" href="#ritual" data-spy="ritual">Cómo se usa</a>
+          <a class="nav-link" href="#kit" data-spy="kit">El kit</a>
+        </nav>
+
+        <!-- Comprar (desktop: píldora con contador · móvil: ícono de bolsa) -->
+        <a href="#productos" class="btn hidden px-5 text-navy shadow-sm hover:bg-navy hover:text-white md:inline-flex">
+          <svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-shopping_bag"/></svg>
+          <span>Comprar</span>
+          <span class="ml-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-sky text-[11px] font-bold text-navy" data-cart-count aria-hidden="true">0</span>
+        </a>
+        <a href="#productos" class="pressable relative -mr-1.5 flex h-11 w-11 items-center justify-center rounded-full text-navy hover:bg-sand md:hidden" aria-label="Ver productos para comprar">
+          <svg class="icon text-[24px]" aria-hidden="true" focusable="false"><use href="#i-shopping_bag"/></svg>
+          <span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-gold ring-2 ring-cream" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <!-- Menú móvil desplegable: flota sobre el contenido (no empuja la página) -->
+      <nav id="mobile-menu" class="mobile-menu absolute inset-x-0 top-full border-t border-navy/10 bg-cream/95 px-4 pb-4 pt-2 shadow-lg backdrop-blur-md md:hidden" aria-label="Principal móvil" hidden>
+        <ul class="flex flex-col gap-1">
+          <li><a class="nav-link w-full text-body-lg" href="#productos">Productos</a></li>
+          <li><a class="nav-link w-full text-body-lg" href="#tan">Bikini adhesivo</a></li>
+          <li><a class="nav-link w-full text-body-lg" href="#ritual">Cómo se usa</a></li>
+          <li><a class="nav-link w-full text-body-lg" href="#kit">El kit</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ==================================================================
+         HERO
+         ================================================================== -->
+    <section class="relative overflow-hidden bg-cream" aria-labelledby="hero-title">
+      <!-- Brillos ambientales -->
+      <div class="pointer-events-none absolute -top-32 right-1/4 h-[600px] w-[600px] rounded-full bg-sky/20 blur-[130px]" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute -left-20 top-40 h-[420px] w-[420px] rounded-full bg-sand/60 blur-[100px]" aria-hidden="true"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 pb-12 pt-6 sm:px-6 lg:px-12 lg:py-24">
+        <div class="flex flex-col items-center text-center lg:grid lg:grid-cols-12 lg:items-center lg:gap-16 lg:text-left">
+
+          <!-- Columna de texto (en móvil sus hijos se reordenan alrededor de la foto) -->
+          <div class="contents lg:col-span-7 lg:flex lg:flex-col lg:items-start lg:gap-6">
+            <p class="order-1 inline-flex items-center gap-2.5 lg:rounded-full lg:bg-sand lg:px-4 lg:py-1.5">
+              <svg class="icon hidden text-sm text-gold lg:inline-block" aria-hidden="true" focusable="false"><use href="#i-light_mode-fill"/></svg>
+              <span class="eyebrow">Duna · Sunless Self-Tanner</span>
+            </p>
+
+            <h1 id="hero-title" class="order-3 mt-8 font-serif text-headline-lg-mobile leading-snug tracking-tight text-navy sm:text-[44px] sm:leading-[1.15] lg:mt-0 lg:text-display-hero lg:leading-[1.08]">
+              Ese tono <span class="accent text-[38px] sm:text-[48px] lg:text-[60px]">dorado</span> que tanto te gusta, sin exponerte al sol.
+            </h1>
+
+            <p class="order-3 mt-3 max-w-xl text-body-md text-navy/80 lg:mt-0 lg:text-body-lg">
+              Una crema autobronceadora progresiva que desarrolla un bronceado de apariencia natural: piel cálida, luminosa y uniforme.
+            </p>
+
+            <div class="order-3 mt-6 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mt-0 lg:justify-start lg:gap-4 lg:pt-2">
+              <button type="button" class="btn btn-lg btn-navy btn-lift" data-product="duna" data-price="79900">
+                <span>Comprar Duna · 79.900 COP</span>
+                <svg class="icon hidden text-[18px] lg:inline-block" aria-hidden="true" focusable="false"><use href="#i-arrow_forward"/></svg>
+              </button>
+              <a href="#kit" class="btn btn-lg btn-sky btn-lift">Ver el kit completo</a>
+            </div>
+
+            <ul class="order-3 mt-6 flex w-full max-w-xs flex-col gap-2 text-left text-body-sm font-medium text-navy sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-3 lg:mt-0 lg:justify-start lg:pt-4">
+              <li class="flex items-center gap-2.5 sm:gap-2"><span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sand text-gold" aria-hidden="true"><svg class="icon text-sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>Con DHA y aloe vera</li>
+              <li class="flex items-center gap-2.5 sm:gap-2"><span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sand text-gold" aria-hidden="true"><svg class="icon text-sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>Bronceado progresivo</li>
+              <li class="flex items-center gap-2.5 sm:gap-2"><span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sand text-gold" aria-hidden="true"><svg class="icon text-sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>Cero exposición solar</li>
+            </ul>
+
+            <!-- Gancho de la campaña "marquitas sin sol" → sección Tan Alfela -->
+            <a href="#tan" class="pressable group order-3 mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-sand px-4 py-2 text-left text-body-sm font-medium text-navy hover:bg-sky/40 lg:mt-0">
+              <svg class="icon text-base text-gold" aria-hidden="true" focusable="false"><use href="#i-wb_sunny-fill"/></svg>
+              <span>¿Te gustan las marquitas? <strong class="font-bold">Hazlas sin sol con Tan Alfela</strong></span>
+              <svg class="icon text-base transition-transform duration-200 ease-out group-hover:translate-x-0.5" aria-hidden="true" focusable="false"><use href="#i-arrow_forward"/></svg>
+            </a>
+          </div>
+
+          <!-- Foto del hero con bloque desplazado -->
+          <div class="relative isolate order-2 mx-auto mt-6 w-full max-w-[310px] sm:max-w-md lg:col-span-5 lg:mt-0 lg:max-w-none">
+            <div class="relative lg:aspect-[4/5]">
+              <div class="absolute inset-0 translate-x-3.5 translate-y-3.5 rounded-photo bg-sky lg:translate-x-4 lg:translate-y-4" aria-hidden="true"></div>
+              <div class="absolute -bottom-4 -left-4 -z-10 hidden h-32 w-32 rounded-full bg-sand lg:block" aria-hidden="true"></div>
+              <div class="relative h-[340px] overflow-hidden rounded-photo bg-sand shadow-xl sm:h-auto sm:aspect-[4/5] lg:h-full">
+                <picture>
+                  <source media="(max-width: 767px)" srcset="assets/img/m-hero.webp" width="704" height="1520">
+                  <img src="assets/img/d-hero.webp" width="1312" height="732" fetchpriority="high" decoding="async"
+                       class="h-full w-full object-cover object-[38%_center] transition-transform duration-700 ease-out motion-safe:hover:scale-105"
+                       alt="Frasco del autobronceador Duna de Alfela sobre arena dorada, con sombras de hojas de palma y el mar Caribe al fondo">
+                </picture>
+
+                <!-- Insignias flotantes · móvil -->
+                <div class="absolute left-4 top-4 flex items-center gap-1.5 rounded-full bg-cream/95 px-3.5 py-1.5 shadow-sm backdrop-blur-md lg:hidden">
+                  <svg class="icon text-[16px] text-gold" aria-hidden="true" focusable="false"><use href="#i-wb_sunny-fill"/></svg>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-navy">100% Sin Rayos UV</span>
+                </div>
+                <div class="absolute bottom-4 right-4 flex items-center gap-1 rounded-full bg-cream/95 px-3 py-1.5 shadow-sm backdrop-blur-md lg:hidden">
+                  <span class="flex text-gold" aria-hidden="true">
+                    <svg class="icon text-[14px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[14px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[14px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[14px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[14px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg>
+                  </span>
+                  <span class="ml-0.5 text-[12px] font-bold text-navy"><span class="sr-only">Calificación </span>4.9<span class="sr-only"> de 5</span></span>
+                </div>
+
+                <!-- Tarjeta flotante · desktop -->
+                <div class="absolute bottom-5 left-5 right-5 hidden items-center justify-between rounded-card bg-cream/90 p-4 shadow-md backdrop-blur-md lg:flex">
+                  <div class="flex items-center gap-3">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-gold/15 text-gold" aria-hidden="true">
+                      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-spa-fill"/></svg>
+                    </span>
+                    <div>
+                      <p class="text-xs font-bold uppercase tracking-wider text-gold-dark">Fórmula Limpia</p>
+                      <p class="font-serif text-sm font-bold text-navy">100% Sin Rayos UV</p>
+                    </div>
+                  </div>
+                  <p class="flex items-center gap-0.5 text-xs font-bold">
+                    <svg class="icon text-sm text-gold" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg>
+                    <span class="text-label-button text-navy"><span class="sr-only">Calificación </span>4.9 / 5</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         INGREDIENTES (fondo navy con olas)
+         ================================================================== -->
+    <section class="on-dark relative bg-navy text-white" aria-labelledby="ingredientes-title">
+      <!-- Ola superior -->
+      <div class="-mt-px overflow-hidden leading-none text-cream" aria-hidden="true">
+        <svg class="block h-8 w-full md:h-12 lg:h-20" viewBox="0 0 1440 96" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0C240 64 480 84 720 54C960 24 1200 48 1440 80V96H0V0Z" fill="currentColor" transform="matrix(1 0 0 -1 0 96)"/>
+        </svg>
+      </div>
+
+      <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-12 lg:py-20">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow mb-2 tracking-[0.2em] lg:mb-3">Ciencia botánica del Caribe</p>
+          <h2 id="ingredientes-title" class="font-serif text-headline-lg-mobile tracking-tight text-white lg:text-headline-lg">
+            Bronceado que también <span class="font-serif italic text-sky">cuida tu piel</span>
+          </h2>
+          <p class="mx-auto mt-3 max-w-sm text-body-md text-cream/80 sm:max-w-none lg:mt-4">
+            Su fórmula combina DHA con ingredientes que acompañan tu rutina de cuidado mientras consigues gradualmente el efecto bronceado que deseas.
+          </p>
+        </div>
+
+        <ul class="mt-8 grid gap-3.5 md:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-6">
+          <li class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
+            <div class="flex items-center justify-between gap-3 lg:flex-col-reverse lg:items-start lg:gap-2">
+              <h3 class="text-balance text-eyebrow font-bold uppercase tracking-wider text-sky lg:font-serif lg:text-headline-sm lg:normal-case lg:tracking-normal lg:text-white">DHA</h3>
+              <span class="font-serif text-headline-sm font-bold text-gold lg:text-headline-md" aria-hidden="true">01</span>
+            </div>
+            <p class="mt-1.5 text-body-sm text-cream/80 lg:mt-3">El activo que desarrolla el color de forma progresiva y natural.</p>
+          </li>
+          <li class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
+            <div class="flex items-center justify-between gap-3 lg:flex-col-reverse lg:items-start lg:gap-2">
+              <h3 class="text-balance text-eyebrow font-bold uppercase tracking-wider text-sky lg:font-serif lg:text-headline-sm lg:normal-case lg:tracking-normal lg:text-white">Aloe vera</h3>
+              <span class="font-serif text-headline-sm font-bold text-gold lg:text-headline-md" aria-hidden="true">02</span>
+            </div>
+            <p class="mt-1.5 text-body-sm text-cream/80 lg:mt-3">Un clásico del cuidado de la piel, presente en cada aplicación.</p>
+          </li>
+          <li class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
+            <div class="flex items-center justify-between gap-3 lg:flex-col-reverse lg:items-start lg:gap-2">
+              <h3 class="text-balance text-eyebrow font-bold uppercase tracking-wider text-sky lg:font-serif lg:text-headline-sm lg:normal-case lg:tracking-normal lg:text-white">Colágeno y vitamina E</h3>
+              <span class="font-serif text-headline-sm font-bold text-gold lg:text-headline-md" aria-hidden="true">03</span>
+            </div>
+            <p class="mt-1.5 text-body-sm text-cream/80 lg:mt-3">Parte de una fórmula pensada como paso de tu rutina, no solo de color.</p>
+          </li>
+          <li class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
+            <div class="flex items-center justify-between gap-3 lg:flex-col-reverse lg:items-start lg:gap-2">
+              <h3 class="text-balance text-eyebrow font-bold uppercase tracking-wider text-sky lg:font-serif lg:text-headline-sm lg:normal-case lg:tracking-normal lg:text-white">Extractos botánicos</h3>
+              <span class="font-serif text-headline-sm font-bold text-gold lg:text-headline-md" aria-hidden="true">04</span>
+            </div>
+            <p class="mt-1.5 text-body-sm text-cream/80 lg:mt-3">El toque natural que completa la crema Duna.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Ola inferior -->
+      <div class="-mb-px overflow-hidden leading-none text-cream" aria-hidden="true">
+        <svg class="block h-8 w-full md:h-12 lg:h-20" viewBox="0 0 1440 96" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 96C320 32 640 16 960 48C1200 72 1360 88 1440 96V96H0Z" fill="currentColor"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         PRODUCTOS (#productos)
+         ================================================================== -->
+    <section id="productos" class="bg-cream py-10 lg:py-24" aria-labelledby="productos-title">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+        <div class="mx-auto max-w-xl text-center">
+          <p class="eyebrow tracking-[0.18em]">La colección</p>
+          <h2 id="productos-title" class="h-section mt-2">Todo para tu glow dorado</h2>
+          <p class="mt-2 text-body-md text-navy/80">Tres esenciales para personalizar, aplicar y mantener el bronceado soñado.</p>
+        </div>
+
+        <div class="mt-6 grid gap-5 md:grid-cols-3 md:gap-6 lg:mt-14 lg:gap-8">
+
+          <!-- Producto: Duna -->
+          <article class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
+            <div class="relative mb-4 h-44 overflow-hidden rounded-2xl bg-sand md:mb-6 md:aspect-square md:h-auto">
+              <span class="absolute left-3 top-3 z-10 rounded-full bg-sky px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-navy shadow-sm">Favorito</span>
+              <picture>
+                <source media="(max-width: 767px)" srcset="assets/img/m-duna.webp" width="704" height="1520">
+                <img src="assets/img/d-duna.webp" width="1312" height="671" loading="lazy" decoding="async"
+                     class="h-full w-full object-cover transition-transform duration-500 motion-safe:hover:scale-105"
+                     alt="Frasco de la crema autobronceadora Duna sobre un fondo cálido de arena, con una gota de su textura cremosa">
+              </picture>
+            </div>
+            <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.14em] text-gold-dark">Crema autobronceadora</p>
+            <h3 class="font-serif text-headline-sm font-bold text-navy">Duna</h3>
+            <p class="mt-2 flex-grow text-body-sm text-navy/80">Sunless self-tanner progresivo con DHA, aloe vera, colágeno y vitamina E.</p>
+            <div class="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:pt-4">
+              <p class="flex items-baseline justify-between md:flex-col">
+                <span class="text-xs uppercase tracking-wider text-navy/80">Precio</span>
+                <span class="text-lg font-bold text-navy">79.900 COP</span>
+              </p>
+              <button type="button" class="btn btn-navy w-full md:w-auto" data-product="duna" data-price="79900">
+                <span>Comprar</span>
+                <svg class="icon text-[16px]" aria-hidden="true" focusable="false"><use href="#i-add_shopping_cart"/></svg>
+                <span class="sr-only">Duna</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Producto: Tan Alfela -->
+          <article class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
+            <div class="relative mb-4 h-44 overflow-hidden rounded-2xl bg-sand md:mb-6 md:aspect-square md:h-auto">
+              <picture>
+                <source media="(max-width: 767px)" srcset="assets/img/m-tan.webp" width="704" height="1261">
+                <img src="assets/img/d-tan.webp" width="1312" height="816" loading="lazy" decoding="async"
+                     class="h-full w-full object-cover transition-transform duration-500 motion-safe:hover:scale-105"
+                     alt="Bikini adhesivo Tan Alfela sobre tela de lino color marfil, junto a un bolso de mimbre y conchas de mar">
+              </picture>
+            </div>
+            <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.14em] text-gold-dark">Par de bikini adhesivo</p>
+            <h3 class="font-serif text-headline-sm font-bold text-navy">Tan Alfela</h3>
+            <p class="mt-2 flex-grow text-body-sm text-navy/80">Marcas de bronceado definidas y a tu medida, con líneas de corte en tallas XS, S y M.</p>
+            <div class="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:pt-4">
+              <p class="flex items-baseline justify-between md:flex-col">
+                <span class="text-xs uppercase tracking-wider text-navy/80">Precio</span>
+                <span class="text-lg font-bold text-navy">35.900 COP</span>
+              </p>
+              <button type="button" class="btn btn-navy w-full md:w-auto" data-product="tan-alfela" data-price="35900">
+                <span>Comprar</span>
+                <svg class="icon text-[16px]" aria-hidden="true" focusable="false"><use href="#i-add_shopping_cart"/></svg>
+                <span class="sr-only">Tan Alfela</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Producto: Glowe -->
+          <article class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
+            <div class="relative mb-4 h-44 overflow-hidden rounded-2xl bg-sand md:mb-6 md:aspect-square md:h-auto">
+              <picture>
+                <source media="(max-width: 767px)" srcset="assets/img/m-glowe.webp" width="704" height="1520">
+                <img src="assets/img/d-glowe.webp" width="1312" height="816" loading="lazy" decoding="async"
+                     class="h-full w-full object-cover transition-transform duration-500 motion-safe:hover:scale-105"
+                     alt="Guante aplicador Glowe de terciopelo suave sobre una piedra travertina iluminada por el sol">
+              </picture>
+            </div>
+            <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.14em] text-gold-dark">Guante para autobronceador</p>
+            <h3 class="font-serif text-headline-sm font-bold text-navy">Glowe</h3>
+            <p class="mt-2 flex-grow text-body-sm text-navy/80">Aplica Duna de forma uniforme, sin vetas y sin manchar tus manos.</p>
+            <div class="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:pt-4">
+              <p class="flex items-baseline justify-between md:flex-col">
+                <span class="text-xs uppercase tracking-wider text-navy/80">Precio</span>
+                <span class="text-lg font-bold text-navy">19.900 COP</span>
+              </p>
+              <button type="button" class="btn btn-navy w-full md:w-auto" data-product="glowe" data-price="19900">
+                <span>Comprar</span>
+                <svg class="icon text-[16px]" aria-hidden="true" focusable="false"><use href="#i-add_shopping_cart"/></svg>
+                <span class="sr-only">Glowe</span>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         TAN ALFELA · BIKINI ADHESIVO (#tan)
+         ================================================================== -->
+    <section id="tan" class="overflow-hidden bg-sand py-10 lg:bg-sand/50 lg:py-24" aria-labelledby="tan-title">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+        <div class="mx-auto flex max-w-sm flex-col items-center text-center sm:max-w-xl lg:grid lg:max-w-none lg:grid-cols-12 lg:items-center lg:gap-16 lg:text-left">
+
+          <div class="contents lg:col-span-6 lg:flex lg:flex-col lg:items-start lg:gap-6">
+            <p class="eyebrow order-1 tracking-[0.18em]">Tan Alfela · Bikini adhesivo</p>
+            <!-- Fase 0 · nuevo mensaje de campaña (pendiente de aprobación del cliente) -->
+            <h2 id="tan-title" class="h-section order-1 mt-3 leading-tight lg:mt-0">
+              Las marquitas que te gustan, <span class="accent text-[38px] lg:text-headline-lg">sin quemarte.</span>
+            </h2>
+            <p class="order-1 mt-2 font-serif text-headline-sm italic text-navy/85 lg:mt-0">Tu forma, tu línea, tu tan.</p>
+
+            <p class="order-3 text-body-md text-navy/85">
+              Nada de horas al sol con cinta. Pega Tan Alfela, aplica Duna y deja que el color aparezca: marcas de bronceado definidas, a tu medida y sin rayos UV. El complemento ideal de Duna, con el diseño que más te guste.
+            </p>
+            <p class="order-3 mt-4 text-body-md text-navy/85 lg:mt-0">
+              Sus líneas de corte en diferentes tallas te permiten adaptar la silueta a tu cuerpo y elegir cómo quieres lucir tus marcas.
+            </p>
+
+            <!-- Selector visual de tallas -->
+            <div class="order-3 mt-6 w-full space-y-3 rounded-card bg-cream/80 p-4 shadow-sm lg:mt-0">
+              <p id="size-label" class="text-[12px] font-bold uppercase tracking-wider text-navy">Líneas de corte en tallas</p>
+              <div class="flex items-center justify-center gap-3 lg:justify-start" role="group" aria-labelledby="size-label" data-size-group>
+                <button type="button" class="size-chip" data-size="XS" aria-pressed="true">XS</button>
+                <button type="button" class="size-chip" data-size="S" aria-pressed="false">S</button>
+                <button type="button" class="size-chip" data-size="M" aria-pressed="false">M</button>
+              </div>
+              <p class="text-xs italic text-navy/80" data-size-hint aria-live="polite">Silueta XS: líneas ultra-delgadas para un efecto sutil y favorecedor.</p>
+            </div>
+
+            <p class="order-3 mt-6 text-body-md text-navy/85 lg:mt-0">
+              Fácil de usar y personalizar: el aliado perfecto para llevar tu autobronceado a otro nivel.
+            </p>
+
+            <div class="order-3 mt-6 w-full lg:mt-0 lg:w-auto lg:pt-2">
+              <button type="button" class="btn btn-lg btn-navy btn-lift w-full lg:w-auto" data-product="tan-alfela" data-price="35900" data-size="XS" data-buy-tan>
+                <span>Comprar Tan Alfela · 35.900 COP</span>
+                <svg class="icon hidden text-[18px] lg:inline-block" aria-hidden="true" focusable="false"><use href="#i-shopping_bag"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Foto con bloque navy desplazado -->
+          <div class="relative order-2 mx-auto my-6 w-full max-w-[280px] sm:max-w-md lg:col-span-6 lg:my-0 lg:max-w-none">
+            <div class="relative lg:aspect-[4/5]">
+              <div class="absolute inset-0 translate-x-3.5 translate-y-3.5 rounded-photo bg-navy lg:translate-x-4 lg:translate-y-4" aria-hidden="true"></div>
+              <div class="relative h-64 overflow-hidden rounded-photo bg-sand shadow-xl sm:h-auto sm:aspect-[4/5] lg:h-full">
+                <picture>
+                  <source media="(max-width: 767px)" srcset="assets/img/m-tan-feature.webp" width="704" height="1520">
+                  <img src="assets/img/d-tan-feature.webp" width="1312" height="816" loading="lazy" decoding="async"
+                       class="h-full w-full object-cover transition-transform duration-700 ease-out motion-safe:hover:scale-105"
+                       alt="Bikini adhesivo Tan Alfela junto a un estuche de viaje y aceite bronceador sobre arena dorada, con olas del mar al fondo">
+                </picture>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         MODO DE USO (#ritual)
+         ================================================================== -->
+    <section id="ritual" class="bg-cream py-10 lg:bg-sand lg:py-28" aria-labelledby="ritual-title">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+        <div class="mx-auto flex max-w-sm flex-col items-center sm:max-w-xl lg:grid lg:max-w-none lg:grid-cols-12 lg:items-center lg:gap-16">
+
+          <div class="contents lg:col-span-7 lg:flex lg:flex-col lg:items-start lg:gap-6">
+            <div class="order-1 text-center lg:text-left">
+              <p class="eyebrow tracking-[0.2em]">Modo de uso</p>
+              <h2 id="ritual-title" class="h-section mt-2 lg:mt-6">Tu ritual dorado en 4 pasos</h2>
+            </div>
+
+            <ol class="order-3 flex w-full flex-col gap-4 lg:pt-2">
+              <li class="flex items-start gap-4 rounded-2xl bg-sand/50 p-4 shadow-sm transition-transform duration-200 lg:bg-cream/70 lg:shadow-none motion-safe:lg:hover:translate-x-1">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-base font-bold text-white shadow-sm" aria-hidden="true">1</span>
+                <div>
+                  <h3 class="font-serif text-[17px] font-bold text-navy lg:font-sans lg:text-base">Prepara tu piel</h3>
+                  <p class="mt-0.5 text-body-sm text-navy/80">Empieza con la piel limpia y seca.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4 rounded-2xl bg-sand/50 p-4 shadow-sm transition-transform duration-200 lg:bg-cream/70 lg:shadow-none motion-safe:lg:hover:translate-x-1">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-base font-bold text-white shadow-sm" aria-hidden="true">2</span>
+                <div>
+                  <h3 class="font-serif text-[17px] font-bold text-navy lg:font-sans lg:text-base">Marca tu bikini</h3>
+                  <p class="mt-0.5 text-body-sm text-navy/80">Ajusta tu Tan Alfela a tu talla, pégalo y elige cómo quieres lucir tus marcas.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4 rounded-2xl bg-sand/50 p-4 shadow-sm transition-transform duration-200 lg:bg-cream/70 lg:shadow-none motion-safe:lg:hover:translate-x-1">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-base font-bold text-white shadow-sm" aria-hidden="true">3</span>
+                <div>
+                  <h3 class="font-serif text-[17px] font-bold text-navy lg:font-sans lg:text-base">Aplica con Glowe</h3>
+                  <p class="mt-0.5 text-body-sm text-navy/80">Distribuye Duna uniformemente con movimientos circulares.</p>
+                </div>
+              </li>
+              <!-- Paso 4: acento dorado -->
+              <li class="flex items-start gap-4 rounded-2xl bg-sand p-4 shadow-sm transition-transform duration-200 lg:bg-cream/90 motion-safe:lg:hover:translate-x-1">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold text-[19px] font-bold text-navy shadow-sm" aria-hidden="true">4</span>
+                <div>
+                  <h3 class="font-serif text-[17px] font-bold text-navy lg:font-sans lg:text-base">Deja que el color aparezca</h3>
+                  <p class="mt-0.5 text-body-sm text-navy/80">Deja actuar según las indicaciones y permite que el bronceado se desarrolle progresivamente.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Foto flat-lay del ritual (en desktop va a la izquierda) -->
+          <div class="order-2 my-6 w-full lg:order-first lg:col-span-5 lg:my-0">
+            <div class="h-52 overflow-hidden rounded-photo bg-white shadow-sm sm:h-auto sm:aspect-[4/3] lg:aspect-[4/5] lg:shadow-xl">
+              <picture>
+                <source media="(max-width: 767px)" srcset="assets/img/m-ritual.webp" width="704" height="1520">
+                <img src="assets/img/d-ritual.webp" width="1312" height="816" loading="lazy" decoding="async"
+                     class="h-full w-full object-cover transition-transform duration-500 motion-safe:hover:scale-105"
+                     alt="Vista cenital del ritual Alfela: caja abierta con el frasco Duna, el guante Glowe, el bikini adhesivo Tan Alfela y una hoja de palma seca">
+              </picture>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         KIT ALFELA (#kit)
+         ================================================================== -->
+    <section id="kit" class="bg-cream py-8 lg:py-24" aria-labelledby="kit-title">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-12">
+        <div class="on-dark relative overflow-hidden rounded-photo bg-navy p-6 text-white shadow-2xl sm:p-10 lg:p-14">
+          <div class="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-sky/20 blur-3xl" aria-hidden="true"></div>
+          <div class="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-gold/15 blur-3xl" aria-hidden="true"></div>
+
+          <div class="relative z-10 flex flex-col items-center text-center lg:grid lg:grid-cols-12 lg:items-center lg:gap-10 lg:text-left">
+            <div class="contents lg:col-span-7 lg:flex lg:flex-col lg:items-start lg:gap-5">
+              <p class="eyebrow order-1 tracking-[0.2em] lg:text-sm">Kit Alfela</p>
+              <h2 id="kit-title" class="order-1 mt-2 font-serif text-headline-lg-mobile leading-tight tracking-tight text-white lg:mt-0 lg:text-headline-lg">
+                El ritual completo, <span class="accent text-[34px] lg:text-headline-lg">en una caja</span>
+              </h2>
+              <p class="order-3 max-w-lg text-body-md text-cream/85">
+                Duna + Tan Alfela + Glowe. Todo lo que necesitas para un bronceado parejo, con marquitas y sin manchas.
+              </p>
+
+              <!-- Precio -->
+              <div class="order-3 mt-5 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-3 lg:mt-0 lg:justify-start lg:pt-2">
+                <!-- PLACEHOLDER [PRECIO KIT]: el precio visible viene de Stitch; confirmar -->
+                <p class="font-serif text-headline-md font-bold text-white lg:text-headline-lg">
+                  <span class="sr-only">Precio del kit: </span>119.900 COP
+                </p>
+                <p class="text-body-md text-sky/80 line-through lg:font-serif lg:text-headline-sm">
+                  <span class="sr-only">Precio normal: </span>135.700 COP
+                </p>
+                <p class="w-full lg:w-auto">
+                  <span class="inline-block rounded-full bg-sky px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-navy">Ahorra 15.800 COP</span>
+                </p>
+              </div>
+
+              <div class="order-3 mt-6 w-full lg:mt-0 lg:w-auto lg:pt-4">
+                <!-- PLACEHOLDER [PRECIO KIT] en data-price -->
+                <button type="button" class="btn btn-lg btn-sky btn-lift w-full px-10 text-base hover:bg-white lg:w-auto" data-product="kit" data-price="[PRECIO KIT]">
+                  <span>Quiero mi kit</span>
+                  <svg class="icon hidden text-xl lg:inline-block" aria-hidden="true" focusable="false"><use href="#i-auto_fix_high"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="order-2 my-4 w-full lg:col-span-5 lg:my-0">
+              <div class="h-48 overflow-hidden rounded-2xl bg-white/10 shadow-2xl sm:h-auto sm:aspect-[4/3]">
+                <picture>
+                  <source media="(max-width: 767px)" srcset="assets/img/m-kit.webp" width="704" height="1520">
+                  <img src="assets/img/d-kit.webp" width="1312" height="635" loading="lazy" decoding="async"
+                       class="h-full w-full object-cover transition-transform duration-700 ease-out motion-safe:hover:scale-105"
+                       alt="Kit Alfela completo: caja con el frasco Duna, el guante Glowe y la caja del bikini adhesivo Tan Alfela sobre dunas blancas bajo el cielo del Caribe">
+                </picture>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         CTA WHATSAPP
+         ================================================================== -->
+    <section class="bg-cream py-12 text-center lg:py-24" aria-labelledby="cta-title">
+      <div class="mx-auto flex max-w-2xl flex-col items-center px-4 sm:px-6">
+        <span class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-sand text-gold shadow-sm lg:mb-6 lg:h-14 lg:w-14" aria-hidden="true">
+          <svg class="icon text-[32px]" aria-hidden="true" focusable="false"><use href="#i-wb_sunny-fill"/></svg>
+        </span>
+        <h2 id="cta-title" class="h-section lg:text-headline-lg">
+          Doradita todo el año, <span class="accent text-[38px] lg:text-headline-lg">sin sol.</span>
+        </h2>
+        <p class="mb-6 mt-3 max-w-xs text-body-md text-navy/80 sm:max-w-md lg:mb-8">
+          ¿Dudas sobre tu tono o cómo aplicarlo? Escríbenos y te asesoramos.
+        </p>
+        <!-- PLACEHOLDER [NÚMERO]: número de WhatsApp sin el 57 (ej. 3001234567) -->
+        <a id="whatsapp-cta" class="btn btn-lg btn-navy btn-lift w-full max-w-xs px-9 sm:w-auto sm:max-w-none"
+           href="https://wa.me/57[NÚMERO]?text=Hola%20Alfela%2C%20quiero%20info%20de%20sus%20productos"
+           target="_blank" rel="noopener noreferrer">
+          <svg class="icon text-xl" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg>
+          <span>Escríbenos por WhatsApp</span>
+          <span class="sr-only">(se abre en una pestaña nueva)</span>
+        </a>
+
+        <ul class="mt-6 flex flex-col items-center gap-2 text-body-sm text-navy/80 sm:flex-row sm:gap-6 lg:mt-12">
+          <li class="inline-flex items-center gap-1.5">
+            <svg class="icon text-[18px] text-navy" aria-hidden="true" focusable="false"><use href="#i-local_shipping"/></svg>
+            Envíos rápidos a toda Colombia
+          </li>
+          <li class="inline-flex items-center gap-1.5">
+            <svg class="icon text-[18px] text-navy" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg>
+            Pagos seguros en línea
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER
+       ==================================================================== -->
+  <footer class="on-dark bg-footer text-sand">
+    <!-- En móvil el padding inferior deja espacio a la barra fija de compra -->
+    <div class="mx-auto max-w-7xl px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-10 sm:px-6 md:pb-8 lg:pt-14">
+      <div class="grid gap-8 pb-8 text-center md:grid-cols-12 md:text-left lg:pb-14">
+        <!-- Marca -->
+        <div class="flex flex-col items-center md:col-span-5 md:items-start">
+          <p class="mb-1 flex items-center gap-2 md:mb-2">
+            <svg class="icon hidden text-3xl text-gold md:inline-block" aria-hidden="true" focusable="false"><use href="#i-cruelty_free"/></svg>
+            <span class="font-serif text-headline-md italic leading-none tracking-tight text-white md:text-headline-lg md:leading-none">Alfela</span>
+          </p>
+          <p class="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-sky md:text-eyebrow">Caribe &amp; Desierto</p>
+          <p class="mb-6 max-w-sm text-body-sm text-sand/85 md:text-body-md">Fórmula cosmética desarrollada con botánicos colombianos para recrear la calidez, textura y resplandor de nuestras costas caribeñas y dunas guajiras sin exposición solar.</p>
+          <p class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-eyebrow uppercase text-sky">
+            <svg class="icon text-base" aria-hidden="true" focusable="false"><use href="#i-verified"/></svg>
+            <span>Marca 100% Colombiana</span>
+          </p>
+        </div>
+
+        <!-- Enlaces -->
+        <nav class="grid grid-cols-3 gap-4 text-left md:col-span-6 md:col-start-7 md:gap-8" aria-label="Pie de página">
+          <div class="flex flex-col">
+            <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.16em] text-sky md:mb-3 md:text-eyebrow">Colección</p>
+            <a class="footer-link" href="#productos">Productos</a>
+            <a class="footer-link" href="#kit">El kit</a>
+            <a class="footer-link" href="#tan">Bikini adhesivo</a>
+            <a class="footer-link" href="#ritual">Modo de uso</a>
+          </div>
+          <div class="flex flex-col">
+            <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.16em] text-sky md:mb-3 md:text-eyebrow">Soporte</p>
+            <!-- PLACEHOLDER: enlazar a la página de envíos y devoluciones -->
+            <a class="footer-link" href="#">Envíos y devoluciones</a>
+            <!-- PLACEHOLDER: enlazar a la página de preguntas frecuentes -->
+            <a class="footer-link" href="#">Preguntas frecuentes</a>
+            <!-- PLACEHOLDER [NÚMERO] -->
+            <a class="footer-link" href="https://wa.me/57[NÚMERO]?text=Hola%20Alfela%2C%20quiero%20info%20de%20sus%20productos" target="_blank" rel="noopener noreferrer" data-whatsapp-link>Contacto WhatsApp</a>
+          </div>
+          <div class="flex flex-col">
+            <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.16em] text-sky md:mb-3 md:text-eyebrow">Comunidad</p>
+            <!-- PLACEHOLDER [USUARIO_INSTAGRAM] -->
+            <a class="footer-link" href="https://www.instagram.com/[USUARIO_INSTAGRAM]/" target="_blank" rel="noopener noreferrer">
+              <svg class="icon text-base" aria-hidden="true" focusable="false"><use href="#i-photo_camera"/></svg><span>Instagram</span>
+            </a>
+            <!-- PLACEHOLDER: enlazar al formulario del boletín -->
+            <a class="footer-link" href="#">
+              <svg class="icon text-base" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span>Boletín Dorado</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+
+      <div class="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-[12px] text-sand/80 sm:flex-row md:text-body-sm">
+        <p>© 2026 Alfela · Colombia. Todos los derechos reservados.</p>
+        <p class="text-[11px] font-bold uppercase tracking-widest text-sand/70 md:text-eyebrow">Hecho con sol y arena</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================================
+       BARRA FIJA INFERIOR (solo móvil)
+       ==================================================================== -->
+  <nav class="fixed inset-x-0 bottom-0 z-40 bg-cream/90 pb-[env(safe-area-inset-bottom)] shadow-bar backdrop-blur-xl md:hidden" aria-label="Compra rápida">
+    <div class="flex h-20 items-center justify-between gap-2 px-4">
+      <a href="#productos" class="pressable flex h-12 min-w-[52px] flex-col items-center justify-center text-navy/80 hover:text-navy">
+        <svg class="icon text-[22px]" aria-hidden="true" focusable="false"><use href="#i-spa"/></svg>
+        <span class="mt-0.5 text-[10px] font-bold uppercase tracking-wider">Línea</span>
+      </a>
+      <button type="button" class="btn h-12 min-w-0 flex-1 whitespace-nowrap bg-navy px-3 text-[13px] tracking-normal text-white shadow-[0_8px_20px_-4px_rgba(0,37,61,0.35)] min-[380px]:text-label-button min-[380px]:tracking-normal" data-product="duna" data-price="79900">
+        Comprar Duna · 79.900 COP
+      </button>
+      <a href="#ritual" class="pressable flex h-12 min-w-[52px] flex-col items-center justify-center text-navy/80 hover:text-navy">
+        <svg class="icon text-[22px]" aria-hidden="true" focusable="false"><use href="#i-wb_sunny"/></svg>
+        <span class="mt-0.5 text-[10px] font-bold uppercase tracking-wider">Guía</span>
+      </a>
+    </div>
+  </nav>
+</body>
+</html>

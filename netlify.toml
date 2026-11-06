@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Caché de 1 semana para imágenes, CSS y JS (los nombres no llevan hash,
+# así que no se usa "immutable": los cambios llegan a los usuarios)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
