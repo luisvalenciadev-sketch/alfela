@@ -127,7 +127,7 @@
       <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 md:h-20 md:px-6">
         <!-- Botón hamburguesa (móvil) -->
         <!-- Los dos íconos se superponen y el CSS cruza menú ↔ cerrar según aria-expanded -->
-        <button id="menu-toggle" type="button" class="menu-toggle pressable -ml-1.5 grid h-11 w-11 place-items-center rounded-full text-navy hover:bg-sand md:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <button id="menu-toggle" type="button" class="menu-toggle pressable -ml-1.5 grid h-11 w-11 place-items-center rounded-full text-navy hover:bg-sand lg:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="icon menu-toggle__open text-[24px]" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg>
           <svg class="icon menu-toggle__close text-[24px]" aria-hidden="true" focusable="false"><use href="#i-close"/></svg>
         </button>
@@ -139,7 +139,7 @@
         </a>
 
         <!-- Navegación desktop -->
-        <nav class="hidden items-center gap-1 md:flex lg:gap-2" aria-label="Principal">
+        <nav class="hidden items-center gap-1 lg:flex xl:gap-2" aria-label="Principal">
           <a class="nav-link" href="#productos" data-spy="productos">Productos</a>
           <a class="nav-link" href="#tan" data-spy="tan">Bikini adhesivo</a>
           <a class="nav-link" href="#ritual" data-spy="ritual">Cómo se usa</a>
@@ -160,7 +160,7 @@
       </div>
 
       <!-- Menú móvil desplegable: flota sobre el contenido (no empuja la página) -->
-      <nav id="mobile-menu" class="mobile-menu absolute inset-x-0 top-full border-t border-navy/10 bg-cream/95 px-4 pb-4 pt-2 shadow-lg backdrop-blur-md md:hidden" aria-label="Principal móvil" hidden>
+      <nav id="mobile-menu" class="mobile-menu absolute inset-x-0 top-full border-t border-navy/10 bg-cream/95 px-4 pb-4 pt-2 shadow-lg backdrop-blur-md lg:hidden" aria-label="Principal móvil" hidden>
         <ul class="flex flex-col gap-1">
           <li><a class="nav-link w-full text-body-lg" href="#productos">Productos</a></li>
           <li><a class="nav-link w-full text-body-lg" href="#tan">Bikini adhesivo</a></li>
@@ -204,19 +204,19 @@
               <span data-ab="hero:b">Duna te da el bronceado y Tan Alfela dibuja tus marquitas: la tendencia que te gusta, sin quemar tu piel.</span>
             </p>
 
-            <div style="--i:3" data-hides-quickbar class="hero-in order-3 mt-6 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mt-0 lg:justify-start lg:gap-4 lg:pt-2">
+            <div style="--i:3" data-hides-quickbar class="hero-in order-3 mt-6 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center lg:mt-0 lg:justify-start lg:gap-4 lg:pt-2">
               <!-- Prueba A/B "orden" · a: Duna primero (control) -->
-              <button data-ab="orden:a" type="button" class="btn btn-lg btn-navy btn-lift" data-product="duna" data-price="79900">
+              <button data-ab="orden:a" type="button" class="btn btn-lg btn-navy btn-lift whitespace-nowrap" data-product="duna" data-price="79900">
                 <span>Comprar Duna · 79.900 COP</span>
                 <svg class="icon hidden text-[18px] lg:inline-block" aria-hidden="true" focusable="false"><use href="#i-arrow_forward"/></svg>
               </button>
-              <a data-ab="orden:a" href="#kit" class="btn btn-lg btn-sky btn-lift">Ver el kit completo</a>
+              <a data-ab="orden:a" href="#kit" class="btn btn-lg btn-sky btn-lift whitespace-nowrap">Ver el kit completo</a>
               <!-- b: kit primero. PLACEHOLDER [PRECIO KIT] en data-price -->
-              <button data-ab="orden:b" type="button" class="btn btn-lg btn-navy btn-lift" data-product="kit" data-price="[PRECIO KIT]">
+              <button data-ab="orden:b" type="button" class="btn btn-lg btn-navy btn-lift whitespace-nowrap" data-product="kit" data-price="[PRECIO KIT]">
                 <span>Quiero el kit · 119.900 COP</span>
                 <svg class="icon hidden text-[18px] lg:inline-block" aria-hidden="true" focusable="false"><use href="#i-arrow_forward"/></svg>
               </button>
-              <button data-ab="orden:b" type="button" class="btn btn-lg btn-sky btn-lift" data-product="duna" data-price="79900">Solo Duna · 79.900 COP</button>
+              <button data-ab="orden:b" type="button" class="btn btn-lg btn-sky btn-lift whitespace-nowrap" data-product="duna" data-price="79900">Solo Duna · 79.900 COP</button>
             </div>
 
             <ul style="--i:4" class="hero-in order-3 mt-6 flex w-full max-w-xs flex-col gap-2 text-left text-body-sm font-medium text-navy sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-3 lg:mt-0 lg:justify-start lg:pt-4">
@@ -364,7 +364,7 @@
             <div class="relative mb-4 h-44 overflow-hidden rounded-2xl bg-sand md:mb-6 md:aspect-square md:h-auto">
               <span class="absolute left-3 top-3 z-10 rounded-full bg-sky px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-navy shadow-sm">Favorito</span>
               <picture>
-                <source media="(max-width: 767px)" srcset="assets/img/m-duna.webp" width="704" height="1520">
+                <source media="(max-width: 767px)" srcset="assets/img/m-duna.webp" width="704" height="1133">
                 <img src="assets/img/d-duna.webp" width="1312" height="671" loading="lazy" decoding="async"
                      class="h-full w-full object-cover transition-transform duration-500 motion-safe:hover:scale-105"
                      alt="Frasco de la crema autobronceadora Duna sobre un fondo cálido de arena, con una gota de su textura cremosa">
@@ -378,12 +378,12 @@
               <svg class="icon text-[16px] text-gold-dark" aria-hidden="true" focusable="false"><use href="#i-verified"/></svg>
               NSO INVIMA [NSO-DUNA]
             </p>
-            <div class="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:pt-4">
-              <p class="flex items-baseline justify-between md:flex-col">
+            <div class="mt-5 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between xl:pt-4">
+              <p class="flex items-baseline justify-between xl:flex-col">
                 <span class="text-xs uppercase tracking-wider text-navy/80">Precio</span>
-                <span class="text-lg font-bold text-navy">79.900 COP</span>
+                <span class="whitespace-nowrap text-lg font-bold text-navy">79.900 COP</span>
               </p>
-              <button type="button" class="btn btn-navy w-full md:w-auto" data-product="duna" data-price="79900">
+              <button type="button" class="btn btn-navy w-full whitespace-nowrap xl:w-auto" data-product="duna" data-price="79900">
                 <span>Comprar</span>
                 <svg class="icon text-[16px]" aria-hidden="true" focusable="false"><use href="#i-add_shopping_cart"/></svg>
                 <span class="sr-only">Duna</span>
@@ -395,7 +395,7 @@
           <article data-reveal class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
             <div class="relative mb-4 h-44 overflow-hidden rounded-2xl bg-sand md:mb-6 md:aspect-square md:h-auto">
               <picture>
-                <source media="(max-width: 767px)" srcset="assets/img/m-tan.webp" width="704" height="1261">
+                <source media="(max-width: 767px)" srcset="assets/img/m-tan.webp" width="704" height="749">
                 <img src="assets/img/d-tan.webp" width="1312" height="816" loading="lazy" decoding="async"
                      class="h-full w-full object-cover transition-transform duration-500 motion-safe:hover:scale-105"
                      alt="Bikini adhesivo Tan Alfela sobre tela de lino color marfil, junto a un bolso de mimbre y conchas de mar">
@@ -404,13 +404,13 @@
             <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.14em] text-gold-dark">Par de bikini adhesivo</p>
             <h3 class="font-serif text-headline-sm font-bold text-navy">Tan Alfela</h3>
             <p class="mt-2 flex-grow text-body-sm text-navy/80">Marcas de bronceado definidas y a tu medida, con líneas de corte en tallas XS, S y M.</p>
-            <div class="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:pt-4">
-              <p class="flex items-baseline justify-between md:flex-col">
+            <div class="mt-5 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between xl:pt-4">
+              <p class="flex items-baseline justify-between xl:flex-col">
                 <span class="text-xs uppercase tracking-wider text-navy/80">Precio</span>
-                <span class="text-lg font-bold text-navy">35.900 COP</span>
+                <span class="whitespace-nowrap text-lg font-bold text-navy">35.900 COP</span>
               </p>
               <!-- Embudo: antes compraba sin talla. Ahora lleva al selector de tallas (#tan) -->
-              <a href="#tan" class="btn btn-navy w-full md:w-auto" data-track="elegir_talla">
+              <a href="#tan" class="btn btn-navy w-full whitespace-nowrap xl:w-auto" data-track="elegir_talla">
                 <span>Elegir talla</span>
                 <svg class="icon text-[16px]" aria-hidden="true" focusable="false"><use href="#i-arrow_forward"/></svg>
                 <span class="sr-only">de Tan Alfela</span>
@@ -422,8 +422,8 @@
           <article data-reveal class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
             <div class="relative mb-4 h-44 overflow-hidden rounded-2xl bg-sand md:mb-6 md:aspect-square md:h-auto">
               <picture>
-                <source media="(max-width: 767px)" srcset="assets/img/m-glowe.webp" width="704" height="1520">
-                <img src="assets/img/d-glowe.webp" width="1312" height="816" loading="lazy" decoding="async"
+                <source media="(max-width: 767px)" srcset="assets/img/m-glowe.webp" width="704" height="1181">
+                <img src="assets/img/d-glowe.webp" width="704" height="1181" loading="lazy" decoding="async"
                      class="h-full w-full object-cover transition-transform duration-500 motion-safe:hover:scale-105"
                      alt="Guante aplicador Glowe de terciopelo suave sobre una piedra travertina iluminada por el sol">
               </picture>
@@ -431,12 +431,12 @@
             <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.14em] text-gold-dark">Guante para autobronceador</p>
             <h3 class="font-serif text-headline-sm font-bold text-navy">Glowe</h3>
             <p class="mt-2 flex-grow text-body-sm text-navy/80">Aplica Duna de forma uniforme, sin vetas y sin manchar tus manos.</p>
-            <div class="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:pt-4">
-              <p class="flex items-baseline justify-between md:flex-col">
+            <div class="mt-5 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between xl:pt-4">
+              <p class="flex items-baseline justify-between xl:flex-col">
                 <span class="text-xs uppercase tracking-wider text-navy/80">Precio</span>
-                <span class="text-lg font-bold text-navy">19.900 COP</span>
+                <span class="whitespace-nowrap text-lg font-bold text-navy">19.900 COP</span>
               </p>
-              <button type="button" class="btn btn-navy w-full md:w-auto" data-product="glowe" data-price="19900">
+              <button type="button" class="btn btn-navy w-full whitespace-nowrap xl:w-auto" data-product="glowe" data-price="19900">
                 <span>Comprar</span>
                 <svg class="icon text-[16px]" aria-hidden="true" focusable="false"><use href="#i-add_shopping_cart"/></svg>
                 <span class="sr-only">Glowe</span>
@@ -526,7 +526,7 @@
               <div class="absolute inset-0 translate-x-3.5 translate-y-3.5 rounded-photo bg-navy lg:translate-x-4 lg:translate-y-4" aria-hidden="true"></div>
               <div class="relative h-64 overflow-hidden rounded-photo bg-sand shadow-xl sm:h-auto sm:aspect-[4/5] lg:h-full">
                 <picture>
-                  <source media="(max-width: 767px)" srcset="assets/img/m-tan-feature.webp" width="704" height="1520">
+                  <source media="(max-width: 767px)" srcset="assets/img/m-tan-feature.webp" width="704" height="1101">
                   <img src="assets/img/d-tan-feature.webp" width="1312" height="816" loading="lazy" decoding="async"
                        class="h-full w-full object-cover transition-transform duration-700 ease-out motion-safe:hover:scale-105"
                        alt="Bikini adhesivo Tan Alfela junto a un estuche de viaje y aceite bronceador sobre arena dorada, con olas del mar al fondo">
@@ -589,7 +589,7 @@
           <div class="order-2 my-6 w-full lg:order-first lg:col-span-5 lg:my-0">
             <div class="h-52 overflow-hidden rounded-photo bg-white shadow-sm sm:h-auto sm:aspect-[4/3] lg:aspect-[4/5] lg:shadow-xl">
               <picture>
-                <source media="(max-width: 767px)" srcset="assets/img/m-ritual.webp" width="704" height="1520">
+                <source media="(max-width: 767px)" srcset="assets/img/m-ritual.webp" width="704" height="906">
                 <img src="assets/img/d-ritual.webp" width="1312" height="816" loading="lazy" decoding="async"
                      class="h-full w-full object-cover transition-transform duration-500 motion-safe:hover:scale-105"
                      alt="Vista cenital del ritual Alfela: caja abierta con el frasco Duna, el guante Glowe, el bikini adhesivo Tan Alfela y una hoja de palma seca">
@@ -640,7 +640,7 @@
             </svg>
           </figure>
 
-          <div>
+          <div class="mx-auto w-full max-w-xl lg:max-w-none">
             <fieldset>
               <legend class="mb-3 w-full text-center text-[12px] font-bold uppercase tracking-wider text-navy lg:text-left">Elige tu intensidad</legend>
               <div class="seg mx-auto max-w-sm lg:mx-0">
@@ -651,7 +651,7 @@
               </div>
             </fieldset>
 
-            <div class="mt-6 min-h-[17rem] rounded-card bg-white p-5 shadow-sm lg:p-7" aria-live="polite">
+            <div class="mt-6 rounded-card bg-white p-5 shadow-sm lg:p-7" aria-live="polite">
               <div class="int-panel" data-level="sutil">
                 <h3 class="font-serif text-headline-sm text-navy">Sutil</h3>
                 <p class="mt-1 text-body-md text-navy/85">Un toque de luz, como después de un fin de semana en la playa.</p>
@@ -910,7 +910,7 @@
             <div class="order-2 my-4 w-full lg:col-span-5 lg:my-0">
               <div class="h-48 overflow-hidden rounded-2xl bg-white/10 shadow-2xl sm:h-auto sm:aspect-[4/3]">
                 <picture>
-                  <source media="(max-width: 767px)" srcset="assets/img/m-kit.webp" width="704" height="1520">
+                  <source media="(max-width: 767px)" srcset="assets/img/m-kit.webp" width="704" height="789">
                   <img src="assets/img/d-kit.webp" width="1312" height="635" loading="lazy" decoding="async"
                        class="h-full w-full object-cover transition-transform duration-700 ease-out motion-safe:hover:scale-105"
                        alt="Kit Alfela completo: caja con el frasco Duna, el guante Glowe y la caja del bikini adhesivo Tan Alfela sobre dunas blancas bajo el cielo del Caribe">
