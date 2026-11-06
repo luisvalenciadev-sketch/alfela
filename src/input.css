@@ -15,6 +15,11 @@
     --dur-press: 160ms;
     --dur-fast: 150ms;
     --dur-base: 200ms;
+    --dur-slide: 250ms;     /* #4 píldora de tallas/intensidad y silueta */
+    --dur-reveal: 500ms;    /* #5 grillas al entrar en pantalla */
+    --dur-enter: 600ms;     /* #2 entrada del hero */
+    --stagger-enter: 60ms;
+    --stagger-reveal: 50ms;
   }
 
   html {
@@ -36,7 +41,7 @@
 
   /* Controles: respuesta inmediata al toque y sin selección de texto con pulsación larga.
      (Solo controles: el texto de contenido sigue siendo seleccionable.) */
-  button, [role='button'], .btn, .pressable, .size-chip {
+  button, [role='button'], .btn, .pressable, .seg__item {
     touch-action: manipulation;
     -webkit-user-select: none;
     user-select: none;
@@ -65,6 +70,14 @@
   }
 
   [hidden] { display: none !important; }
+
+  /* Fase 2 · contenido pendiente (NSO INVIMA, reseñas, videos, antes/después).
+     Oculto en el sitio; visible con borde punteado al abrir la página con ?pendientes */
+  html:not(.show-pending) [data-pending] { display: none !important; }
+  .show-pending [data-pending] {
+    outline: 2px dashed theme('colors.gold.DEFAULT');
+    outline-offset: 4px;
+  }
 }
 
 /* -------------------------------------------------------- Componentes ---- */
@@ -92,12 +105,12 @@
   }
 
   /* Presionar: se aplica al tocar (no al soltar), en touch y mouse */
-  .pressable, .size-chip {
+  .pressable {
     transition-property: color, background-color, box-shadow, scale;
     transition-duration: var(--dur-press);
     transition-timing-function: var(--ease-out);
   }
-  .btn:active, .pressable:active, .size-chip:active { scale: 0.97; }
+  .btn:active, .pressable:active, .seg__item:active { scale: 0.97; }
 
   /* Antetítulo en mayúsculas — dorado oscuro (#8A5E00) para cumplir AA */
   .eyebrow { @apply font-sans text-eyebrow uppercase tracking-[0.16em] text-gold-dark; }
@@ -108,10 +121,6 @@
   /* Palabra destacada en itálica dorada (solo en títulos grandes) */
   .accent { @apply whitespace-nowrap font-serif italic text-gold; }
 
-  /* Chips de talla */
-  .size-chip {
-    @apply min-h-11 min-w-14 rounded-full bg-sand px-5 font-sans text-label-button text-navy hover:bg-sky/40;
-  }
 
   /* Animación #3 · menú móvil.
      Entra con @starting-style y sale con display allow-discrete; sin soporte, aparece sin animar. */
@@ -147,7 +156,6 @@
     @starting-style { .mobile-menu:not([hidden]) { translate: none; } }
     .menu-toggle > .icon { scale: 1 !important; }
   }
-  .size-chip[aria-pressed='true'] { @apply bg-navy text-white shadow-sm hover:bg-navy; }
 
   /* Enlaces del menú principal */
   .nav-link {
@@ -159,4 +167,286 @@
   .footer-link {
     @apply inline-flex min-h-11 items-center gap-1.5 text-body-sm text-sand/85 transition hover:text-white md:min-h-0 md:py-1 md:text-body-md;
   }
+  .footer-link[aria-current='page'] { @apply font-bold text-white; }
+
+  /* ---------------------------------------------- FAQ (acordeón <details>) */
+  .faq-item {
+    @apply rounded-2xl bg-white shadow-sm;
+    transition: box-shadow var(--dur-base) var(--ease-out);
+  }
+  .faq-item[open] { @apply shadow-md; }
+  .faq-item > summary {
+    @apply flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-5 py-4 font-serif text-[17px] font-bold leading-snug text-navy hover:bg-sand/40 lg:px-6 lg:text-lg;
+    transition: background-color var(--dur-fast) var(--ease-out);
+  }
+  .faq-item > summary::-webkit-details-marker { display: none; }
+  .faq-item > summary:focus-visible { border-radius: 16px; }
+  .faq-chevron {
+    @apply text-[24px] text-gold-dark;
+    transition: rotate var(--dur-base) var(--ease-out);
+  }
+  .faq-item[open] .faq-chevron { rotate: 180deg; }
+  .faq-a { @apply px-5 pb-5 text-body-md text-navy/85 lg:px-6 lg:pb-6; }
+  .faq-a > * + * { @apply mt-3; }
+  .faq-a ul { @apply list-disc space-y-1 pl-5; }
+  .faq-a strong { @apply font-bold text-navy; }
+  .faq-a a { @apply font-medium text-navy underline decoration-gold/60 underline-offset-2 hover:decoration-navy; }
+
+  /* ------------------------------------- Comparador antes / después ------ */
+  /* --pos lo mueve main.js (arrastre y teclado). pan-y: el scroll vertical sigue funcionando */
+  .ba {
+    --pos: 50%;
+    @apply relative aspect-[4/5] cursor-ew-resize select-none overflow-hidden rounded-photo bg-sand shadow-sm;
+    touch-action: pan-y;
+  }
+  .ba:has(.ba__range:focus-visible) {
+    outline: 3px solid theme('colors.navy');
+    outline-offset: 3px;
+  }
+  .ba__img { @apply pointer-events-none absolute inset-0 h-full w-full object-cover; }
+  .ba__after { clip-path: inset(0 0 0 var(--pos)); }
+  .ba__handle {
+    @apply pointer-events-none absolute inset-y-0 w-0.5 bg-white shadow-[0_0_8px_rgba(0,0,0,0.25)];
+    left: var(--pos);
+    translate: -50% 0;
+  }
+  .ba__knob {
+    @apply absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cream text-navy shadow-md;
+  }
+  .ba__label {
+    @apply pointer-events-none absolute top-4 rounded-full bg-cream/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-navy backdrop-blur-sm;
+  }
+  /* Rango nativo: invisible pero enfocable (teclado y lectores de pantalla) */
+  .ba__range { @apply pointer-events-none absolute inset-0 m-0 h-full w-full opacity-0; }
+
+  /* ----------------------------------------- Páginas legales (prosa) ----- */
+  .legal { @apply text-body-md text-navy/85; }
+  .legal h2 { @apply mt-12 scroll-mt-24 font-serif text-headline-sm text-navy lg:text-headline-md; }
+  .legal h3 { @apply mt-6 font-sans text-base font-bold text-navy; }
+  .legal p, .legal ul, .legal ol { @apply mt-3; }
+  .legal ul { @apply list-disc space-y-1.5 pl-5; }
+  .legal ol { @apply list-decimal space-y-1.5 pl-5; }
+  .legal strong { @apply font-bold text-navy; }
+  .legal a { @apply font-medium text-navy underline decoration-gold/60 underline-offset-2 hover:decoration-navy; }
 }
+
+/* FAQ · apertura animada (Chrome 131+). Donde no hay soporte, abre sin animar. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports selector(::details-content) {
+    .faq-item { interpolate-size: allow-keywords; }
+    .faq-item::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size var(--dur-base) var(--ease-out),
+        content-visibility var(--dur-base) allow-discrete;
+    }
+    .faq-item[open]::details-content { block-size: auto; }
+  }
+}
+
+/* ==========================================================================
+   Fase 3 · Experiencia
+   Va fuera de @layer para que Tailwind no la purgue (varias clases las pone el JS).
+   ========================================================================== */
+
+/* ---- Control segmentado con píldora deslizante · animación #4 ------------
+   Lo usan las tallas (botones con aria-pressed) y la intensidad (radios).
+   La píldora se mueve solo con CSS (:has). Sin :has, el activo se pinta navy. */
+.seg {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  max-width: 20rem;
+  padding: 0.25rem;
+  border-radius: 9999px;
+  background-color: theme('colors.sand');
+}
+.seg__item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-family: theme('fontFamily.sans');
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: theme('colors.navy');
+  cursor: pointer;
+  transition:
+    color var(--dur-slide) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    scale var(--dur-press) var(--ease-out);
+}
+.seg__item > span { transition: color var(--dur-slide) var(--ease-out); }
+.seg__item[aria-pressed='true'],
+.seg__item > input:checked + span { color: #fff; }
+.seg__item:has(> input:focus-visible) {
+  outline: 3px solid theme('colors.navy');
+  outline-offset: 3px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .seg__item:not([aria-pressed='true']):not(:has(> input:checked)):hover {
+    background-color: rgb(154 215 249 / 0.4);
+  }
+}
+
+.seg__pill { display: none; }
+@supports selector(:has(*)) {
+  .seg__pill {
+    display: block;
+    position: absolute;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    left: 0.25rem;
+    width: calc((100% - 0.5rem) / 3);
+    border-radius: 9999px;
+    background-color: theme('colors.navy');
+    box-shadow: 0 1px 3px rgb(0 37 61 / 0.18);
+    transition: translate var(--dur-slide) var(--ease-out);
+  }
+  /* hijos: 1 = píldora, 2-4 = opciones */
+  .seg:has(> :nth-child(3)[aria-pressed='true']) > .seg__pill,
+  .seg:has(> :nth-child(3) > input:checked) > .seg__pill { translate: 100% 0; }
+  .seg:has(> :nth-child(4)[aria-pressed='true']) > .seg__pill,
+  .seg:has(> :nth-child(4) > input:checked) > .seg__pill { translate: 200% 0; }
+}
+@supports not selector(:has(*)) {
+  .seg__item[aria-pressed='true'] { background-color: theme('colors.navy'); }
+  .seg__item > span { padding: 0.5rem 1rem; border-radius: 9999px; }
+  .seg__item > input:checked + span { background-color: theme('colors.navy'); }
+}
+
+/* ---- Silueta de marquitas (visualizador de tallas y guía de intensidad) -- */
+.vis-skin {
+  fill: var(--tan, #CF9566);              /* tono "Dorado" por defecto */
+  transition: fill 300ms var(--ease-out);
+}
+.vis-marks { fill: #F3DAC3; stroke: #F3DAC3; }   /* piel sin sol */
+.vis-string {
+  fill: none;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  transition: stroke-width var(--dur-slide) var(--ease-out);
+}
+.vis-top, .vis-bottom {
+  stroke: none;
+  transform-box: fill-box;
+  transition: scale var(--dur-slide) var(--ease-out);
+}
+.vis-top { transform-origin: 50% 100%; }   /* las copas crecen desde la línea del busto */
+.vis-bottom { transform-origin: 50% 0; }   /* la parte de abajo crece desde la cadera */
+
+/* Tallas: S es la base (escala 1). Lo activa aria-pressed del selector. */
+.size-picker:has([data-size='XS'][aria-pressed='true']) :is(.vis-top, .vis-bottom) { scale: 0.72; }
+.size-picker:has([data-size='XS'][aria-pressed='true']) .vis-string { stroke-width: 1.6; }
+.size-picker:has([data-size='M'][aria-pressed='true']) .vis-top { scale: 1.18; }
+.size-picker:has([data-size='M'][aria-pressed='true']) .vis-bottom { scale: 1.22; }
+.size-picker:has([data-size='M'][aria-pressed='true']) .vis-string { stroke-width: 4; }
+
+/* ---- Guía de intensidad (funciona sin JS) ------------------------------- */
+.int-guide { --tan: #CF9566; }                                           /* Dorado */
+.int-guide:has(input[value='sutil']:checked) { --tan: #E2B48E; }
+.int-guide:has(input[value='intenso']:checked) { --tan: #B0703F; }
+
+.int-panel {
+  display: none;
+  animation: fade-in var(--dur-base) var(--ease-out);   /* se repite cada vez que el panel aparece */
+}
+.int-guide:has(input[value='sutil']:checked) .int-panel[data-level='sutil'],
+.int-guide:has(input[value='dorado']:checked) .int-panel[data-level='dorado'],
+.int-guide:has(input[value='intenso']:checked) .int-panel[data-level='intenso'] { display: block; }
+@supports not selector(:has(*)) {
+  .int-panel { display: block; }
+  .int-panel + .int-panel { margin-top: 1.5rem; border-top: 1px solid rgb(0 59 94 / 0.1); padding-top: 1.5rem; }
+}
+.int-facts {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+  border-top: 1px solid rgb(0 59 94 / 0.1);
+  padding-top: 1rem;
+}
+.int-facts dt {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: theme('colors.gold.dark');
+}
+.int-facts dd { margin-top: 0.125rem; font-size: 13px; line-height: 20px; color: rgb(0 59 94 / 0.85); }
+
+@keyframes fade-in { from { opacity: 0; } }
+
+/* ---- Animación #2 · entrada del hero ----------------------------------
+   Escalonado de 60 ms con --i. La foto no se anima (LCP). backwards: tras
+   terminar, el elemento vuelve a sus estilos (no pisa hover ni :active). */
+@keyframes hero-rise { from { opacity: 0; translate: 0 12px; } }
+@keyframes hero-block { from { transform: translate(0, 0); } }   /* sale de detrás de la foto */
+
+/* ---- Animación #5 · grillas al entrar en pantalla, una sola vez --------
+   .js-reveal lo pone un script del <head> solo si hay IntersectionObserver
+   y no se pidió reducir movimiento: sin JS el contenido se ve normal. */
+@keyframes reveal-rise { from { opacity: 0; translate: 0 16px; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-in {
+    animation: hero-rise var(--dur-enter) var(--ease-out) backwards;
+    animation-delay: calc(var(--i, 0) * var(--stagger-enter));
+  }
+  .hero-block { animation: hero-block var(--dur-enter) var(--ease-out) 120ms backwards; }
+
+  .js-reveal [data-reveal]:not(.is-revealed) { opacity: 0; }
+  .js-reveal [data-reveal].is-revealed {
+    animation: reveal-rise var(--dur-reveal) var(--ease-out) backwards;
+    animation-delay: calc(var(--i, 0) * var(--stagger-reveal));
+  }
+}
+
+/* Movimiento reducido: los cambios de estado son instantáneos (sin deslizar ni escalar) */
+@media (prefers-reduced-motion: reduce) {
+  .seg__pill, .vis-top, .vis-bottom, .vis-string { transition: none; }
+}
+
+/* ---- Animación #1 · barra de compra móvil ------------------------------
+   .js-bar (lo pone el <head>) la oculta desde el primer pintado; main.js añade
+   .is-shown cuando ningún CTA de Duna está en pantalla. Entra en 400 ms con la
+   curva de cajón y sale por el mismo borde en 250 ms. visibility la saca del
+   foco y del lector de pantalla mientras está oculta. */
+.quickbar {
+  transition:
+    translate 400ms var(--ease-drawer),
+    visibility 0s;
+}
+.js-bar .quickbar:not(.is-shown) {
+  translate: 0 100%;
+  visibility: hidden;
+  transition:
+    translate 250ms var(--ease-drawer),
+    visibility 0s linear 250ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .quickbar { transition: opacity 150ms var(--ease-out), visibility 0s; }
+  .js-bar .quickbar:not(.is-shown) {
+    translate: none;
+    opacity: 0;
+    transition: opacity 150ms var(--ease-out), visibility 0s linear 150ms;
+  }
+}
+
+/* ==========================================================================
+   Fase 4 · Pruebas A/B
+   El <head> pone data-ab-hero / data-ab-orden en <html> antes del primer pintado.
+   Cada bloque marcado con data-ab="prueba:variante" solo se ve en su variante.
+   Sin JS no hay atributo y se ve el control (a).
+   ========================================================================== */
+html:not([data-ab-hero='b']) [data-ab='hero:b'],
+html[data-ab-hero='b'] [data-ab='hero:a'],
+html:not([data-ab-orden='b']) [data-ab='orden:b'],
+html[data-ab-orden='b'] [data-ab='orden:a'] { display: none !important; }

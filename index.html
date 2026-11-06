@@ -24,6 +24,10 @@
   <meta property="og:image:alt" content="Frasco de autobronceador Duna de Alfela sobre arena dorada frente al mar Caribe">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- Datos estructurados FAQPage: `npm run build` los genera aquí a partir de la sección #faq.
+       No edites el JSON a mano: edita las preguntas en la sección. -->
+  <!-- FAQ_SCHEMA -->
+
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
   <!-- ================================================== Fuentes ========= -->
@@ -36,7 +40,48 @@
   <link rel="preload" as="image" href="assets/img/d-hero.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
 
   <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- Antes del primer pintado (sin parpadeo):
+       · Pruebas A/B (Fase 4): asigna la variante de cada prueba y la guarda en el navegador.
+       · Animaciones #1 y #5: preparan la barra móvil y la aparición de grillas.
+         Si main.js no llega en 4 s, se desactivan para que el contenido nunca quede oculto. -->
+  <script>
+    (function (d, w) {
+      /* ===== PRUEBAS A/B ======================================================
+         active:false → todas ven la variante "a" (control) y esa prueba no se mide.
+         Si cambias los textos de una prueba en curso, sube VERSION (reasigna a todas).
+         QA: ?ab-hero=b&ab-orden=b fuerza variantes y marca el tráfico como interno. */
+      var TESTS = {
+        hero:  { active: true, variants: ['a', 'b'] },   // a: "Ese tono dorado…" · b: "Marquitas y glow dorado…"
+        orden: { active: true, variants: ['a', 'b'] }    // a: Duna primero · b: kit primero
+      };
+      var VERSION = 1, KEY = 'alfela-ab', ab = null, qa = false;
+      try { ab = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+      if (!ab || ab.version !== VERSION) {
+        ab = { version: VERSION, ref: Math.random().toString(36).slice(2, 6).toUpperCase() };
+      }
+      var query = new URLSearchParams(location.search), shown = {};
+      for (var t in TESTS) {
+        var cfg = TESTS[t];
+        if (cfg.variants.indexOf(ab[t]) === -1) ab[t] = cfg.variants[Math.floor(Math.random() * cfg.variants.length)];
+        var forced = query.get('ab-' + t);
+        if (cfg.variants.indexOf(forced) !== -1) qa = true;
+        shown[t] = !cfg.active ? 'a' : (cfg.variants.indexOf(forced) !== -1 ? forced : ab[t]);
+        d.setAttribute('data-ab-' + t, shown[t]);
+      }
+      try { localStorage.setItem(KEY, JSON.stringify(ab)); } catch (e) {}
+      // ref: código corto que viaja en los mensajes de WhatsApp para atribuir ventas a cada variante
+      w.alfelaAB = { tests: TESTS, shown: shown, ref: ab.ref, qa: qa };
+
+      /* ===== Animaciones #1 y #5 ============================================ */
+      if (!('IntersectionObserver' in w)) return;
+      d.classList.add('js-bar');                     // #1 barra móvil: arranca oculta
+      if (matchMedia('(prefers-reduced-motion: no-preference)').matches) d.classList.add('js-reveal');
+      setTimeout(function () { if (!w.__alfelaReady) d.classList.remove('js-reveal', 'js-bar'); }, 4000);
+    })(document.documentElement, window);
+  </script>
   <script src="assets/js/main.js" defer></script>
+  <!-- Analítica (GA4, Meta, TikTok): solo carga con IDs configurados y consentimiento de la usuaria -->
+  <script src="assets/js/analytics.js" defer></script>
 </head>
 
 <body>
@@ -47,6 +92,9 @@
     <symbol id="i-arrow_forward" viewBox="0 -960 960 960"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></symbol>
     <symbol id="i-auto_fix_high" viewBox="0 -960 960 960"><path d="m800-680-38-82-82-38 82-38 38-82 38 82 82 38-82 38-38 82Zm-460 0-38-82-82-38 82-38 38-82 38 82 82 38-82 38-38 82Zm460 460-38-82-82-38 82-38 38-82 38 82 82 38-82 38-38 82ZM204-92 92-204q-12-12-12-29t12-29l446-446q12-12 29-12t29 12l112 112q12 12 12 29t-12 29L262-92q-12 12-29 12t-29-12Zm30-84 286-288-56-56-288 286 58 58Z"/></symbol>
     <symbol id="i-chat" viewBox="0 -960 960 960"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></symbol>
+    <symbol id="i-chevron_left" viewBox="0 -960 960 960"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></symbol>
+    <symbol id="i-chevron_right" viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></symbol>
+    <symbol id="i-expand_more" viewBox="0 -960 960 960"><path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"/></symbol>
     <symbol id="i-check" viewBox="0 -960 960 960"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></symbol>
     <symbol id="i-close" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></symbol>
     <symbol id="i-cruelty_free" viewBox="0 -960 960 960"><path d="M380-80q-75 0-127.5-52.5T200-260q0-35 17-64.5t63-75.5q6-6 11.5-12.5T306-430q-51-78-78.5-163.5T200-760q0-58 21-89t59-31q57 0 102 55t68 101q9 20 16.5 40.5T480-641q6-22 13.5-42.5T511-724q22-46 67-101t102-55q38 0 59 31t21 89q0 81-27.5 166.5T654-430q9 11 14.5 17.5T680-400q46 46 63 75.5t17 64.5q0 75-52.5 127.5T580-80q-45 0-72.5-10L480-100l-27.5 10Q425-80 380-80Zm0-80q23 0 46-5.5t43-16.5q-11-5-20-17t-9-21q0-8 11.5-14t28.5-6q17 0 28.5 6t11.5 14q0 9-9 21t-20 17q20 11 43 16.5t46 5.5q42 0 71-29t29-71q0-18-10-35t-30-34q-14-12-23-21t-29-34q-29-35-48-45.5T480-440q-41 0-60.5 10.5T372-384q-20 25-29 34t-23 21q-20 17-30 34t-10 35q0 42 29 71t71 29Zm40-130q-8 0-14-9t-6-21q0-12 6-21t14-9q8 0 14 9t6 21q0 12-6 21t-14 9Zm120 0q-8 0-14-9t-6-21q0-12 6-21t14-9q8 0 14 9t6 21q0 12-6 21t-14 9ZM363-489q11-8 25-14t31-11q-2-48-14.5-95.5T373-696q-19-40-42-67.5T285-799q-2 6-3.5 15.5T280-760q0 68 21.5 138T363-489Zm234 0q40-63 61.5-133T680-760q0-14-1.5-23.5T675-799q-23 8-46 35.5T587-696q-18 39-30.5 86.5T541-514q15 4 29 10.5t27 14.5Z"/></symbol>
@@ -102,7 +150,8 @@
         <a href="#productos" class="btn hidden px-5 text-navy shadow-sm hover:bg-navy hover:text-white md:inline-flex">
           <svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-shopping_bag"/></svg>
           <span>Comprar</span>
-          <span class="ml-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-sky text-[11px] font-bold text-navy" data-cart-count aria-hidden="true">0</span>
+          <!-- Embudo: el contador mostraba siempre "0" (no hay bolsa todavía). Quitar hidden cuando exista la bolsa (Fase 1). -->
+          <span class="ml-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-sky text-[11px] font-bold text-navy" data-cart-count aria-hidden="true" hidden>0</span>
         </a>
         <a href="#productos" class="pressable relative -mr-1.5 flex h-11 w-11 items-center justify-center rounded-full text-navy hover:bg-sand md:hidden" aria-label="Ver productos para comprar">
           <svg class="icon text-[24px]" aria-hidden="true" focusable="false"><use href="#i-shopping_bag"/></svg>
@@ -127,7 +176,7 @@
     <!-- ==================================================================
          HERO
          ================================================================== -->
-    <section class="relative overflow-hidden bg-cream" aria-labelledby="hero-title">
+    <section id="hero" class="relative overflow-hidden bg-cream" aria-labelledby="hero-title">
       <!-- Brillos ambientales -->
       <div class="pointer-events-none absolute -top-32 right-1/4 h-[600px] w-[600px] rounded-full bg-sky/20 blur-[130px]" aria-hidden="true"></div>
       <div class="pointer-events-none absolute -left-20 top-40 h-[420px] w-[420px] rounded-full bg-sand/60 blur-[100px]" aria-hidden="true"></div>
@@ -135,37 +184,49 @@
       <div class="relative mx-auto max-w-7xl px-4 pb-12 pt-6 sm:px-6 lg:px-12 lg:py-24">
         <div class="flex flex-col items-center text-center lg:grid lg:grid-cols-12 lg:items-center lg:gap-16 lg:text-left">
 
-          <!-- Columna de texto (en móvil sus hijos se reordenan alrededor de la foto) -->
+          <!-- Columna de texto (en móvil sus hijos se reordenan alrededor de la foto)
+               Animación #2 · entrada escalonada: .hero-in + --i (orden), 60 ms entre piezas.
+               La foto NO se anima (es el LCP); solo .hero-block se desliza a su sitio. -->
           <div class="contents lg:col-span-7 lg:flex lg:flex-col lg:items-start lg:gap-6">
-            <p class="order-1 inline-flex items-center gap-2.5 lg:rounded-full lg:bg-sand lg:px-4 lg:py-1.5">
+            <p style="--i:0" class="hero-in order-1 inline-flex items-center gap-2.5 lg:rounded-full lg:bg-sand lg:px-4 lg:py-1.5">
               <svg class="icon hidden text-sm text-gold lg:inline-block" aria-hidden="true" focusable="false"><use href="#i-light_mode-fill"/></svg>
               <span class="eyebrow">Duna · Sunless Self-Tanner</span>
             </p>
 
-            <h1 id="hero-title" class="order-3 mt-8 font-serif text-headline-lg-mobile leading-snug tracking-tight text-navy sm:text-[44px] sm:leading-[1.15] lg:mt-0 lg:text-display-hero lg:leading-[1.08]">
-              Ese tono <span class="accent text-[38px] sm:text-[48px] lg:text-[60px]">dorado</span> que tanto te gusta, sin exponerte al sol.
+            <h1 style="--i:1" id="hero-title" class="hero-in order-3 mt-8 font-serif text-headline-lg-mobile leading-snug tracking-tight text-navy sm:text-[44px] sm:leading-[1.15] lg:mt-0 lg:text-display-hero lg:leading-[1.08]">
+              <!-- Prueba A/B "hero" · a: control · b: ángulo marquitas (texto nuevo: requiere aprobación del cliente) -->
+              <span data-ab="hero:a">Ese tono <span class="accent text-[38px] sm:text-[48px] lg:text-[60px]">dorado</span> que tanto te gusta, sin exponerte al sol.</span>
+              <span data-ab="hero:b">Marquitas y glow <span class="accent text-[38px] sm:text-[48px] lg:text-[60px]">dorado</span>, sin un minuto al sol.</span>
             </h1>
 
-            <p class="order-3 mt-3 max-w-xl text-body-md text-navy/80 lg:mt-0 lg:text-body-lg">
-              Una crema autobronceadora progresiva que desarrolla un bronceado de apariencia natural: piel cálida, luminosa y uniforme.
+            <p style="--i:2" class="hero-in order-3 mt-3 max-w-xl text-body-md text-navy/80 lg:mt-0 lg:text-body-lg">
+              <span data-ab="hero:a">Una crema autobronceadora progresiva que desarrolla un bronceado de apariencia natural: piel cálida, luminosa y uniforme.</span>
+              <span data-ab="hero:b">Duna te da el bronceado y Tan Alfela dibuja tus marquitas: la tendencia que te gusta, sin quemar tu piel.</span>
             </p>
 
-            <div class="order-3 mt-6 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mt-0 lg:justify-start lg:gap-4 lg:pt-2">
-              <button type="button" class="btn btn-lg btn-navy btn-lift" data-product="duna" data-price="79900">
+            <div style="--i:3" data-hides-quickbar class="hero-in order-3 mt-6 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center lg:mt-0 lg:justify-start lg:gap-4 lg:pt-2">
+              <!-- Prueba A/B "orden" · a: Duna primero (control) -->
+              <button data-ab="orden:a" type="button" class="btn btn-lg btn-navy btn-lift" data-product="duna" data-price="79900">
                 <span>Comprar Duna · 79.900 COP</span>
                 <svg class="icon hidden text-[18px] lg:inline-block" aria-hidden="true" focusable="false"><use href="#i-arrow_forward"/></svg>
               </button>
-              <a href="#kit" class="btn btn-lg btn-sky btn-lift">Ver el kit completo</a>
+              <a data-ab="orden:a" href="#kit" class="btn btn-lg btn-sky btn-lift">Ver el kit completo</a>
+              <!-- b: kit primero. PLACEHOLDER [PRECIO KIT] en data-price -->
+              <button data-ab="orden:b" type="button" class="btn btn-lg btn-navy btn-lift" data-product="kit" data-price="[PRECIO KIT]">
+                <span>Quiero el kit · 119.900 COP</span>
+                <svg class="icon hidden text-[18px] lg:inline-block" aria-hidden="true" focusable="false"><use href="#i-arrow_forward"/></svg>
+              </button>
+              <button data-ab="orden:b" type="button" class="btn btn-lg btn-sky btn-lift" data-product="duna" data-price="79900">Solo Duna · 79.900 COP</button>
             </div>
 
-            <ul class="order-3 mt-6 flex w-full max-w-xs flex-col gap-2 text-left text-body-sm font-medium text-navy sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-3 lg:mt-0 lg:justify-start lg:pt-4">
+            <ul style="--i:4" class="hero-in order-3 mt-6 flex w-full max-w-xs flex-col gap-2 text-left text-body-sm font-medium text-navy sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-3 lg:mt-0 lg:justify-start lg:pt-4">
               <li class="flex items-center gap-2.5 sm:gap-2"><span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sand text-gold" aria-hidden="true"><svg class="icon text-sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>Con DHA y aloe vera</li>
               <li class="flex items-center gap-2.5 sm:gap-2"><span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sand text-gold" aria-hidden="true"><svg class="icon text-sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>Bronceado progresivo</li>
               <li class="flex items-center gap-2.5 sm:gap-2"><span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sand text-gold" aria-hidden="true"><svg class="icon text-sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>Cero exposición solar</li>
             </ul>
 
             <!-- Gancho de la campaña "marquitas sin sol" → sección Tan Alfela -->
-            <a href="#tan" class="pressable group order-3 mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-sand px-4 py-2 text-left text-body-sm font-medium text-navy hover:bg-sky/40 lg:mt-0">
+            <a style="--i:5" href="#tan" class="hero-in pressable group order-3 mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-sand px-4 py-2 text-left text-body-sm font-medium text-navy hover:bg-sky/40 lg:mt-0">
               <svg class="icon text-base text-gold" aria-hidden="true" focusable="false"><use href="#i-wb_sunny-fill"/></svg>
               <span>¿Te gustan las marquitas? <strong class="font-bold">Hazlas sin sol con Tan Alfela</strong></span>
               <svg class="icon text-base transition-transform duration-200 ease-out group-hover:translate-x-0.5" aria-hidden="true" focusable="false"><use href="#i-arrow_forward"/></svg>
@@ -175,7 +236,7 @@
           <!-- Foto del hero con bloque desplazado -->
           <div class="relative isolate order-2 mx-auto mt-6 w-full max-w-[310px] sm:max-w-md lg:col-span-5 lg:mt-0 lg:max-w-none">
             <div class="relative lg:aspect-[4/5]">
-              <div class="absolute inset-0 translate-x-3.5 translate-y-3.5 rounded-photo bg-sky lg:translate-x-4 lg:translate-y-4" aria-hidden="true"></div>
+              <div class="hero-block absolute inset-0 translate-x-3.5 translate-y-3.5 rounded-photo bg-sky lg:translate-x-4 lg:translate-y-4" aria-hidden="true"></div>
               <div class="absolute -bottom-4 -left-4 -z-10 hidden h-32 w-32 rounded-full bg-sand lg:block" aria-hidden="true"></div>
               <div class="relative h-[340px] overflow-hidden rounded-photo bg-sand shadow-xl sm:h-auto sm:aspect-[4/5] lg:h-full">
                 <picture>
@@ -190,7 +251,8 @@
                   <svg class="icon text-[16px] text-gold" aria-hidden="true" focusable="false"><use href="#i-wb_sunny-fill"/></svg>
                   <span class="text-[11px] font-bold uppercase tracking-wider text-navy">100% Sin Rayos UV</span>
                 </div>
-                <div class="absolute bottom-4 right-4 flex items-center gap-1 rounded-full bg-cream/95 px-3 py-1.5 shadow-sm backdrop-blur-md lg:hidden">
+                <!-- Fase 2 · la calificación solo se muestra cuando salga de reseñas reales (quitar data-pending) -->
+                <div data-pending class="absolute bottom-4 right-4 flex items-center gap-1 rounded-full bg-cream/95 px-3 py-1.5 shadow-sm backdrop-blur-md lg:hidden">
                   <span class="flex text-gold" aria-hidden="true">
                     <svg class="icon text-[14px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[14px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[14px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[14px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[14px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg>
                   </span>
@@ -208,7 +270,8 @@
                       <p class="font-serif text-sm font-bold text-navy">100% Sin Rayos UV</p>
                     </div>
                   </div>
-                  <p class="flex items-center gap-0.5 text-xs font-bold">
+                  <!-- Fase 2 · calificación pendiente de reseñas reales (quitar data-pending) -->
+                  <p data-pending class="flex items-center gap-0.5 text-xs font-bold">
                     <svg class="icon text-sm text-gold" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg>
                     <span class="text-label-button text-navy"><span class="sr-only">Calificación </span>4.9 / 5</span>
                   </p>
@@ -244,28 +307,28 @@
         </div>
 
         <ul class="mt-8 grid gap-3.5 md:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-6">
-          <li class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
+          <li data-reveal class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
             <div class="flex items-center justify-between gap-3 lg:flex-col-reverse lg:items-start lg:gap-2">
               <h3 class="text-balance text-eyebrow font-bold uppercase tracking-wider text-sky lg:font-serif lg:text-headline-sm lg:normal-case lg:tracking-normal lg:text-white">DHA</h3>
               <span class="font-serif text-headline-sm font-bold text-gold lg:text-headline-md" aria-hidden="true">01</span>
             </div>
             <p class="mt-1.5 text-body-sm text-cream/80 lg:mt-3">El activo que desarrolla el color de forma progresiva y natural.</p>
           </li>
-          <li class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
+          <li data-reveal class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
             <div class="flex items-center justify-between gap-3 lg:flex-col-reverse lg:items-start lg:gap-2">
               <h3 class="text-balance text-eyebrow font-bold uppercase tracking-wider text-sky lg:font-serif lg:text-headline-sm lg:normal-case lg:tracking-normal lg:text-white">Aloe vera</h3>
               <span class="font-serif text-headline-sm font-bold text-gold lg:text-headline-md" aria-hidden="true">02</span>
             </div>
             <p class="mt-1.5 text-body-sm text-cream/80 lg:mt-3">Un clásico del cuidado de la piel, presente en cada aplicación.</p>
           </li>
-          <li class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
+          <li data-reveal class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
             <div class="flex items-center justify-between gap-3 lg:flex-col-reverse lg:items-start lg:gap-2">
               <h3 class="text-balance text-eyebrow font-bold uppercase tracking-wider text-sky lg:font-serif lg:text-headline-sm lg:normal-case lg:tracking-normal lg:text-white">Colágeno y vitamina E</h3>
               <span class="font-serif text-headline-sm font-bold text-gold lg:text-headline-md" aria-hidden="true">03</span>
             </div>
             <p class="mt-1.5 text-body-sm text-cream/80 lg:mt-3">Parte de una fórmula pensada como paso de tu rutina, no solo de color.</p>
           </li>
-          <li class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
+          <li data-reveal class="rounded-card bg-white/5 p-4 backdrop-blur-sm transition duration-300 hover:bg-white/10 lg:p-7 motion-safe:lg:hover:-translate-y-1">
             <div class="flex items-center justify-between gap-3 lg:flex-col-reverse lg:items-start lg:gap-2">
               <h3 class="text-balance text-eyebrow font-bold uppercase tracking-wider text-sky lg:font-serif lg:text-headline-sm lg:normal-case lg:tracking-normal lg:text-white">Extractos botánicos</h3>
               <span class="font-serif text-headline-sm font-bold text-gold lg:text-headline-md" aria-hidden="true">04</span>
@@ -297,7 +360,7 @@
         <div class="mt-6 grid gap-5 md:grid-cols-3 md:gap-6 lg:mt-14 lg:gap-8">
 
           <!-- Producto: Duna -->
-          <article class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
+          <article data-reveal class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
             <div class="relative mb-4 h-44 overflow-hidden rounded-2xl bg-sand md:mb-6 md:aspect-square md:h-auto">
               <span class="absolute left-3 top-3 z-10 rounded-full bg-sky px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-navy shadow-sm">Favorito</span>
               <picture>
@@ -310,6 +373,11 @@
             <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.14em] text-gold-dark">Crema autobronceadora</p>
             <h3 class="font-serif text-headline-sm font-bold text-navy">Duna</h3>
             <p class="mt-2 flex-grow text-body-sm text-navy/80">Sunless self-tanner progresivo con DHA, aloe vera, colágeno y vitamina E.</p>
+            <!-- PLACEHOLDER [NSO-DUNA]: número de Notificación Sanitaria Obligatoria del INVIMA (quitar data-pending) -->
+            <p data-pending class="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-navy/80">
+              <svg class="icon text-[16px] text-gold-dark" aria-hidden="true" focusable="false"><use href="#i-verified"/></svg>
+              NSO INVIMA [NSO-DUNA]
+            </p>
             <div class="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:pt-4">
               <p class="flex items-baseline justify-between md:flex-col">
                 <span class="text-xs uppercase tracking-wider text-navy/80">Precio</span>
@@ -324,7 +392,7 @@
           </article>
 
           <!-- Producto: Tan Alfela -->
-          <article class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
+          <article data-reveal class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
             <div class="relative mb-4 h-44 overflow-hidden rounded-2xl bg-sand md:mb-6 md:aspect-square md:h-auto">
               <picture>
                 <source media="(max-width: 767px)" srcset="assets/img/m-tan.webp" width="704" height="1261">
@@ -341,16 +409,17 @@
                 <span class="text-xs uppercase tracking-wider text-navy/80">Precio</span>
                 <span class="text-lg font-bold text-navy">35.900 COP</span>
               </p>
-              <button type="button" class="btn btn-navy w-full md:w-auto" data-product="tan-alfela" data-price="35900">
-                <span>Comprar</span>
-                <svg class="icon text-[16px]" aria-hidden="true" focusable="false"><use href="#i-add_shopping_cart"/></svg>
-                <span class="sr-only">Tan Alfela</span>
-              </button>
+              <!-- Embudo: antes compraba sin talla. Ahora lleva al selector de tallas (#tan) -->
+              <a href="#tan" class="btn btn-navy w-full md:w-auto" data-track="elegir_talla">
+                <span>Elegir talla</span>
+                <svg class="icon text-[16px]" aria-hidden="true" focusable="false"><use href="#i-arrow_forward"/></svg>
+                <span class="sr-only">de Tan Alfela</span>
+              </a>
             </div>
           </article>
 
           <!-- Producto: Glowe -->
-          <article class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
+          <article data-reveal class="flex flex-col rounded-card bg-white p-4 shadow-sm transition duration-300 hover:shadow-xl md:p-6">
             <div class="relative mb-4 h-44 overflow-hidden rounded-2xl bg-sand md:mb-6 md:aspect-square md:h-auto">
               <picture>
                 <source media="(max-width: 767px)" srcset="assets/img/m-glowe.webp" width="704" height="1520">
@@ -401,15 +470,42 @@
               Sus líneas de corte en diferentes tallas te permiten adaptar la silueta a tu cuerpo y elegir cómo quieres lucir tus marcas.
             </p>
 
-            <!-- Selector visual de tallas -->
-            <div class="order-3 mt-6 w-full space-y-3 rounded-card bg-cream/80 p-4 shadow-sm lg:mt-0">
-              <p id="size-label" class="text-[12px] font-bold uppercase tracking-wider text-navy">Líneas de corte en tallas</p>
-              <div class="flex items-center justify-center gap-3 lg:justify-start" role="group" aria-labelledby="size-label" data-size-group>
-                <button type="button" class="size-chip" data-size="XS" aria-pressed="true">XS</button>
-                <button type="button" class="size-chip" data-size="S" aria-pressed="false">S</button>
-                <button type="button" class="size-chip" data-size="M" aria-pressed="false">M</button>
+            <!-- Selector de tallas + visualizador de marquitas (Fase 3 · animación #4)
+                 La silueta es ilustrativa (decorativa: aria-hidden); el texto de ayuda describe cada talla.
+                 Píldora y silueta cambian solo con CSS (:has + aria-pressed); main.js alterna aria-pressed. -->
+            <div class="size-picker order-3 mt-6 flex w-full flex-col items-center gap-4 rounded-card bg-cream/80 p-4 shadow-sm sm:flex-row sm:gap-6 lg:mt-0">
+              <figure class="w-32 shrink-0 overflow-hidden rounded-2xl bg-sand/70 sm:w-36" aria-hidden="true">
+                <svg class="tan-vis block h-auto w-full" viewBox="0 0 240 300" focusable="false">
+                  <defs>
+                    <clipPath id="tv-body"><path d="M104 0L104 24C104 32 90 36 66 40C50 43 41 52 40 64C39 86 46 108 50 130C53 150 62 168 64 185C66 205 48 222 46 250C44 270 52 288 58 300L182 300C188 288 196 270 194 250C192 222 174 205 176 185C178 168 187 150 190 130C194 108 201 86 200 64C199 52 190 43 174 40C150 36 136 32 136 24L136 0Z"/></clipPath>
+                    <radialGradient id="tv-shade" cx="50%" cy="42%" r="62%"><stop offset=".5" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#5A2E10" stop-opacity=".22"/></radialGradient>
+                    <linearGradient id="tv-fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".07" stop-color="#fff"/><stop offset=".84" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+                    <mask id="tv-mask"><rect width="240" height="300" fill="url(#tv-fade)"/></mask>
+                  </defs>
+                  <g mask="url(#tv-mask)">
+                    <path class="vis-skin" d="M104 0L104 24C104 32 90 36 66 40C50 43 41 52 40 64C39 86 46 108 50 130C53 150 62 168 64 185C66 205 48 222 46 250C44 270 52 288 58 300L182 300C188 288 196 270 194 250C192 222 174 205 176 185C178 168 187 150 190 130C194 108 201 86 200 64C199 52 190 43 174 40C150 36 136 32 136 24L136 0Z"/>
+                    <g class="vis-marks" clip-path="url(#tv-body)">
+                      <path class="vis-string" d="M96 98L112 0M144 98L128 0M0 142Q120 147 240 142M90 234Q60 228 0 220M150 234Q180 228 240 220"/>
+                      <path class="vis-top" d="M96 96C104 112 112 126 116 140Q94 146 72 140C80 124 88 110 96 96Z"/>
+                      <path class="vis-top" d="M144 96C136 112 128 126 124 140Q146 146 168 140C160 124 152 110 144 96Z"/>
+                      <path class="vis-bottom" d="M88 232Q120 238 152 232C146 262 132 292 128 330L112 330C108 292 94 262 88 232Z"/>
+                    </g>
+                    <path fill="url(#tv-shade)" d="M104 0L104 24C104 32 90 36 66 40C50 43 41 52 40 64C39 86 46 108 50 130C53 150 62 168 64 185C66 205 48 222 46 250C44 270 52 288 58 300L182 300C188 288 196 270 194 250C192 222 174 205 176 185C178 168 187 150 190 130C194 108 201 86 200 64C199 52 190 43 174 40C150 36 136 32 136 24L136 0Z"/>
+                    <ellipse cx="120" cy="204" rx="2.4" ry="3.6" fill="#5A2E10" opacity=".28"/>
+                  </g>
+                </svg>
+              </figure>
+
+              <div class="w-full space-y-3 text-center sm:text-left">
+                <p id="size-label" class="text-[12px] font-bold uppercase tracking-wider text-navy">Líneas de corte en tallas</p>
+                <div class="seg mx-auto sm:mx-0" role="group" aria-labelledby="size-label" data-size-group>
+                  <span class="seg__pill" aria-hidden="true"></span>
+                  <button type="button" class="seg__item" data-size="XS" aria-pressed="true">XS</button>
+                  <button type="button" class="seg__item" data-size="S" aria-pressed="false">S</button>
+                  <button type="button" class="seg__item" data-size="M" aria-pressed="false">M</button>
+                </div>
+                <p class="min-h-10 text-xs italic text-navy/80" data-size-hint aria-live="polite">Silueta XS: líneas ultra-delgadas para un efecto sutil y favorecedor.</p>
               </div>
-              <p class="text-xs italic text-navy/80" data-size-hint aria-live="polite">Silueta XS: líneas ultra-delgadas para un efecto sutil y favorecedor.</p>
             </div>
 
             <p class="order-3 mt-6 text-body-md text-navy/85 lg:mt-0">
@@ -457,21 +553,21 @@
             </div>
 
             <ol class="order-3 flex w-full flex-col gap-4 lg:pt-2">
-              <li class="flex items-start gap-4 rounded-2xl bg-sand/50 p-4 shadow-sm transition-transform duration-200 lg:bg-cream/70 lg:shadow-none motion-safe:lg:hover:translate-x-1">
+              <li data-reveal class="flex items-start gap-4 rounded-2xl bg-sand/50 p-4 shadow-sm transition-transform duration-200 lg:bg-cream/70 lg:shadow-none motion-safe:lg:hover:translate-x-1">
                 <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-base font-bold text-white shadow-sm" aria-hidden="true">1</span>
                 <div>
                   <h3 class="font-serif text-[17px] font-bold text-navy lg:font-sans lg:text-base">Prepara tu piel</h3>
                   <p class="mt-0.5 text-body-sm text-navy/80">Empieza con la piel limpia y seca.</p>
                 </div>
               </li>
-              <li class="flex items-start gap-4 rounded-2xl bg-sand/50 p-4 shadow-sm transition-transform duration-200 lg:bg-cream/70 lg:shadow-none motion-safe:lg:hover:translate-x-1">
+              <li data-reveal class="flex items-start gap-4 rounded-2xl bg-sand/50 p-4 shadow-sm transition-transform duration-200 lg:bg-cream/70 lg:shadow-none motion-safe:lg:hover:translate-x-1">
                 <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-base font-bold text-white shadow-sm" aria-hidden="true">2</span>
                 <div>
                   <h3 class="font-serif text-[17px] font-bold text-navy lg:font-sans lg:text-base">Marca tu bikini</h3>
                   <p class="mt-0.5 text-body-sm text-navy/80">Ajusta tu Tan Alfela a tu talla, pégalo y elige cómo quieres lucir tus marcas.</p>
                 </div>
               </li>
-              <li class="flex items-start gap-4 rounded-2xl bg-sand/50 p-4 shadow-sm transition-transform duration-200 lg:bg-cream/70 lg:shadow-none motion-safe:lg:hover:translate-x-1">
+              <li data-reveal class="flex items-start gap-4 rounded-2xl bg-sand/50 p-4 shadow-sm transition-transform duration-200 lg:bg-cream/70 lg:shadow-none motion-safe:lg:hover:translate-x-1">
                 <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-base font-bold text-white shadow-sm" aria-hidden="true">3</span>
                 <div>
                   <h3 class="font-serif text-[17px] font-bold text-navy lg:font-sans lg:text-base">Aplica con Glowe</h3>
@@ -479,7 +575,7 @@
                 </div>
               </li>
               <!-- Paso 4: acento dorado -->
-              <li class="flex items-start gap-4 rounded-2xl bg-sand p-4 shadow-sm transition-transform duration-200 lg:bg-cream/90 motion-safe:lg:hover:translate-x-1">
+              <li data-reveal class="flex items-start gap-4 rounded-2xl bg-sand p-4 shadow-sm transition-transform duration-200 lg:bg-cream/90 motion-safe:lg:hover:translate-x-1">
                 <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold text-[19px] font-bold text-navy shadow-sm" aria-hidden="true">4</span>
                 <div>
                   <h3 class="font-serif text-[17px] font-bold text-navy lg:font-sans lg:text-base">Deja que el color aparezca</h3>
@@ -502,6 +598,270 @@
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         GUÍA DE INTENSIDAD (#intensidad) · Fase 3
+         Funciona sin JS: radios + :has() cambian el tono de la silueta, la píldora y el panel.
+         Los colores son ilustrativos. El número de aplicaciones por nivel debe darlo el
+         fabricante: está oculto con data-pending ([CAPAS-SUTIL], [CAPAS-DORADO], [CAPAS-INTENSO]).
+         ================================================================== -->
+    <section id="intensidad" class="bg-sand/50 py-10 lg:bg-cream lg:py-24" aria-labelledby="intensidad-title">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-12">
+        <div class="mx-auto max-w-xl text-center">
+          <p class="eyebrow tracking-[0.18em]">Guía de intensidad</p>
+          <h2 id="intensidad-title" class="h-section mt-2">Tú decides qué tan <span class="accent text-[34px] lg:text-headline-lg">dorada</span></h2>
+          <p class="mt-2 text-body-md text-navy/80">Duna es progresiva: cada aplicación suma color. Empieza suave y sube hasta encontrar tu tono.</p>
+        </div>
+
+        <div class="int-guide mt-8 grid items-center gap-6 lg:mt-14 lg:grid-cols-2 lg:gap-16">
+          <!-- Silueta: el tono de piel sigue al nivel elegido -->
+          <figure class="relative mx-auto w-full max-w-[260px] overflow-hidden rounded-photo bg-sand shadow-sm lg:order-first lg:max-w-sm" aria-hidden="true">
+            <div class="pointer-events-none absolute -top-10 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-gold/25 blur-3xl"></div>
+            <svg class="relative block h-auto w-full" viewBox="0 0 240 300" focusable="false">
+              <defs>
+                <clipPath id="iv-body"><path d="M104 0L104 24C104 32 90 36 66 40C50 43 41 52 40 64C39 86 46 108 50 130C53 150 62 168 64 185C66 205 48 222 46 250C44 270 52 288 58 300L182 300C188 288 196 270 194 250C192 222 174 205 176 185C178 168 187 150 190 130C194 108 201 86 200 64C199 52 190 43 174 40C150 36 136 32 136 24L136 0Z"/></clipPath>
+                <radialGradient id="iv-shade" cx="50%" cy="42%" r="62%"><stop offset=".5" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#5A2E10" stop-opacity=".22"/></radialGradient>
+                <linearGradient id="iv-fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".07" stop-color="#fff"/><stop offset=".84" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+                <mask id="iv-mask"><rect width="240" height="300" fill="url(#iv-fade)"/></mask>
+              </defs>
+              <g mask="url(#iv-mask)">
+                <path class="vis-skin" d="M104 0L104 24C104 32 90 36 66 40C50 43 41 52 40 64C39 86 46 108 50 130C53 150 62 168 64 185C66 205 48 222 46 250C44 270 52 288 58 300L182 300C188 288 196 270 194 250C192 222 174 205 176 185C178 168 187 150 190 130C194 108 201 86 200 64C199 52 190 43 174 40C150 36 136 32 136 24L136 0Z"/>
+                <g class="vis-marks" clip-path="url(#iv-body)">
+                  <path class="vis-string" d="M96 98L112 0M144 98L128 0M0 142Q120 147 240 142M90 234Q60 228 0 220M150 234Q180 228 240 220"/>
+                  <path class="vis-top" d="M96 96C104 112 112 126 116 140Q94 146 72 140C80 124 88 110 96 96Z"/>
+                  <path class="vis-top" d="M144 96C136 112 128 126 124 140Q146 146 168 140C160 124 152 110 144 96Z"/>
+                  <path class="vis-bottom" d="M88 232Q120 238 152 232C146 262 132 292 128 330L112 330C108 292 94 262 88 232Z"/>
+                </g>
+                <path fill="url(#iv-shade)" d="M104 0L104 24C104 32 90 36 66 40C50 43 41 52 40 64C39 86 46 108 50 130C53 150 62 168 64 185C66 205 48 222 46 250C44 270 52 288 58 300L182 300C188 288 196 270 194 250C192 222 174 205 176 185C178 168 187 150 190 130C194 108 201 86 200 64C199 52 190 43 174 40C150 36 136 32 136 24L136 0Z"/>
+                <ellipse cx="120" cy="204" rx="2.4" ry="3.6" fill="#5A2E10" opacity=".28"/>
+              </g>
+            </svg>
+          </figure>
+
+          <div>
+            <fieldset>
+              <legend class="mb-3 w-full text-center text-[12px] font-bold uppercase tracking-wider text-navy lg:text-left">Elige tu intensidad</legend>
+              <div class="seg mx-auto max-w-sm lg:mx-0">
+                <span class="seg__pill" aria-hidden="true"></span>
+                <label class="seg__item"><input class="sr-only" type="radio" name="intensidad" value="sutil"><span>Sutil</span></label>
+                <label class="seg__item"><input class="sr-only" type="radio" name="intensidad" value="dorado" checked><span>Dorado</span></label>
+                <label class="seg__item"><input class="sr-only" type="radio" name="intensidad" value="intenso"><span>Intenso</span></label>
+              </div>
+            </fieldset>
+
+            <div class="mt-6 min-h-[17rem] rounded-card bg-white p-5 shadow-sm lg:p-7" aria-live="polite">
+              <div class="int-panel" data-level="sutil">
+                <h3 class="font-serif text-headline-sm text-navy">Sutil</h3>
+                <p class="mt-1 text-body-md text-navy/85">Un toque de luz, como después de un fin de semana en la playa.</p>
+                <dl class="int-facts">
+                  <div><dt>Ideal para</dt><dd>Tu primera vez con Duna o el día a día.</dd></div>
+                  <!-- PLACEHOLDER [CAPAS-SUTIL]: aplicaciones según el fabricante (quitar data-pending) -->
+                  <div data-pending><dt>Aplicaciones</dt><dd>[CAPAS-SUTIL]</dd></div>
+                  <div><dt>Tip</dt><dd>Aplica una capa delgada y deja que el color se desarrolle por completo antes de decidir si quieres más.</dd></div>
+                </dl>
+              </div>
+              <div class="int-panel" data-level="dorado">
+                <h3 class="font-serif text-headline-sm text-navy">Dorado</h3>
+                <p class="mt-1 text-body-md text-navy/85">El glow de vacaciones: piel cálida, luminosa y uniforme.</p>
+                <dl class="int-facts">
+                  <div><dt>Ideal para</dt><dd>Verte de vacaciones sin viajar.</dd></div>
+                  <!-- PLACEHOLDER [CAPAS-DORADO] -->
+                  <div data-pending><dt>Aplicaciones</dt><dd>[CAPAS-DORADO]</dd></div>
+                  <div><dt>Tip</dt><dd>Suma aplicaciones de a una, siempre con Glowe, para que el color quede parejo.</dd></div>
+                </dl>
+              </div>
+              <div class="int-panel" data-level="intenso">
+                <h3 class="font-serif text-headline-sm text-navy">Intenso</h3>
+                <p class="mt-1 text-body-md text-navy/85">Un bronceado profundo para que tus marquitas se noten.</p>
+                <dl class="int-facts">
+                  <div><dt>Ideal para</dt><dd>Un matrimonio, un grado o tu viaje a la playa.</dd></div>
+                  <!-- PLACEHOLDER [CAPAS-INTENSO] -->
+                  <div data-pending><dt>Aplicaciones</dt><dd>[CAPAS-INTENSO]</dd></div>
+                  <div><dt>Tip</dt><dd>Combínalo con Tan Alfela: entre más dorada tu piel, más contraste tienen las marquitas.</dd></div>
+                </dl>
+              </div>
+            </div>
+
+            <p class="mt-4 text-center text-xs text-navy/80 lg:text-left">Colores de referencia. El resultado depende de tu tono natural de piel; sigue siempre las indicaciones del empaque.</p>
+
+            <div class="mt-6 flex justify-center lg:justify-start" data-hides-quickbar>
+              <button type="button" class="btn btn-lg btn-navy btn-lift w-full sm:w-auto" data-product="duna" data-price="79900">
+                <span>Comprar Duna · 79.900 COP</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         RESULTADOS · ANTES Y DESPUÉS, VIDEOS Y RESEÑAS (#resultados)
+         Oculto (data-pending) hasta tener contenido REAL de clientas con su
+         autorización por escrito. No inventes reseñas ni retoques las fotos.
+         · Vista previa: abre la página con ?pendientes al final de la URL.
+         · Para publicar: quita data-pending de la <section> y de cada bloque que llenes;
+           borra los bloques que no uses.
+         ================================================================== -->
+    <section id="resultados" class="bg-cream py-10 lg:py-24" aria-labelledby="resultados-title" data-pending>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+        <div class="mx-auto max-w-xl text-center">
+          <p class="eyebrow tracking-[0.18em]">Resultados reales</p>
+          <h2 id="resultados-title" class="h-section mt-2">Ellas ya lucen su <span class="accent text-[34px] lg:text-headline-lg">glow dorado</span></h2>
+          <p class="mt-2 text-body-md text-navy/80">Fotos, videos y opiniones de clientas Alfela, sin filtros ni retoques.</p>
+        </div>
+
+        <!-- ---------- Antes y después ----------
+             Fotos 4:5 (800×1000 px, WebP) con la misma luz, ángulo y distancia.
+             Reemplaza los placeholder-*.svg por p. ej. assets/img/resultados/antes-1.webp y despues-1.webp -->
+        <h3 class="sr-only">Antes y después</h3>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:mt-14 lg:gap-8">
+          <figure data-pending>
+            <div class="ba" data-ba>
+              <img class="ba__img" src="assets/img/resultados/placeholder-antes.svg" width="800" height="1000" loading="lazy" decoding="async" draggable="false"
+                   alt="Antes: [DESCRIPCIÓN FOTO ANTES]">
+              <img class="ba__img ba__after" src="assets/img/resultados/placeholder-despues.svg" width="800" height="1000" loading="lazy" decoding="async" draggable="false"
+                   alt="Después de [N] aplicaciones de Duna: [DESCRIPCIÓN FOTO DESPUÉS]">
+              <span class="ba__label left-4" aria-hidden="true">Antes</span>
+              <span class="ba__label right-4" aria-hidden="true">Después</span>
+              <span class="ba__handle" aria-hidden="true">
+                <span class="ba__knob">
+                  <svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-chevron_left"/></svg><svg class="icon -ml-2 text-[18px]" aria-hidden="true" focusable="false"><use href="#i-chevron_right"/></svg>
+                </span>
+              </span>
+              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Comparar antes y después. Desliza para ver más o menos del después">
+            </div>
+            <figcaption class="mt-3 text-center text-body-sm text-navy/80 md:text-left">
+              <strong class="font-bold text-navy">[NOMBRE CLIENTA]</strong> · [CIUDAD] · [N] aplicaciones de Duna con Glowe
+            </figcaption>
+          </figure>
+
+          <figure data-pending>
+            <div class="ba" data-ba>
+              <img class="ba__img" src="assets/img/resultados/placeholder-antes.svg" width="800" height="1000" loading="lazy" decoding="async" draggable="false"
+                   alt="Antes: [DESCRIPCIÓN FOTO ANTES]">
+              <img class="ba__img ba__after" src="assets/img/resultados/placeholder-despues.svg" width="800" height="1000" loading="lazy" decoding="async" draggable="false"
+                   alt="Después de usar Duna con Tan Alfela: [DESCRIPCIÓN FOTO DESPUÉS]">
+              <span class="ba__label left-4" aria-hidden="true">Antes</span>
+              <span class="ba__label right-4" aria-hidden="true">Después</span>
+              <span class="ba__handle" aria-hidden="true">
+                <span class="ba__knob">
+                  <svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-chevron_left"/></svg><svg class="icon -ml-2 text-[18px]" aria-hidden="true" focusable="false"><use href="#i-chevron_right"/></svg>
+                </span>
+              </span>
+              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Comparar antes y después. Desliza para ver más o menos del después">
+            </div>
+            <figcaption class="mt-3 text-center text-body-sm text-navy/80 md:text-left">
+              <strong class="font-bold text-navy">[NOMBRE CLIENTA]</strong> · [CIUDAD] · Marquitas con Tan Alfela talla [TALLA]
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- ---------- Videos de clientas ----------
+             MP4 (H.264), vertical 9:16, 720×1280, máx. ~8 MB, en assets/video/.
+             Portada: un fotograma en WebP en assets/img/resultados/. Sin autoplay con sonido.
+             Accesibilidad: añade subtítulos con
+             <track kind="captions" src="assets/video/clienta-1.vtt" srclang="es" label="Español"> -->
+        <h3 class="mt-14 text-center font-serif text-headline-sm text-navy lg:mt-20 lg:text-headline-md">En video, como es</h3>
+        <div class="-mx-4 mt-6 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 lg:mt-8 lg:gap-8">
+          <figure class="w-[72%] shrink-0 snap-start sm:w-[45%] md:w-auto" data-pending>
+            <div class="aspect-[9/16] overflow-hidden rounded-card bg-sand shadow-sm">
+              <video class="h-full w-full object-cover" controls playsinline preload="none" poster="assets/img/resultados/placeholder-video.svg" data-testimonial-video>
+                <source src="assets/video/clienta-1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption class="mt-3 text-body-sm text-navy/80">
+              <strong class="block font-bold text-navy">[NOMBRE CLIENTA] · [CIUDAD]</strong>
+              «[FRASE CORTA DEL VIDEO]»
+            </figcaption>
+          </figure>
+          <figure class="w-[72%] shrink-0 snap-start sm:w-[45%] md:w-auto" data-pending>
+            <div class="aspect-[9/16] overflow-hidden rounded-card bg-sand shadow-sm">
+              <video class="h-full w-full object-cover" controls playsinline preload="none" poster="assets/img/resultados/placeholder-video.svg" data-testimonial-video>
+                <source src="assets/video/clienta-2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption class="mt-3 text-body-sm text-navy/80">
+              <strong class="block font-bold text-navy">[NOMBRE CLIENTA] · [CIUDAD]</strong>
+              «[FRASE CORTA DEL VIDEO]»
+            </figcaption>
+          </figure>
+          <figure class="w-[72%] shrink-0 snap-start sm:w-[45%] md:w-auto" data-pending>
+            <div class="aspect-[9/16] overflow-hidden rounded-card bg-sand shadow-sm">
+              <video class="h-full w-full object-cover" controls playsinline preload="none" poster="assets/img/resultados/placeholder-video.svg" data-testimonial-video>
+                <source src="assets/video/clienta-3.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption class="mt-3 text-body-sm text-navy/80">
+              <strong class="block font-bold text-navy">[NOMBRE CLIENTA] · [CIUDAD]</strong>
+              «[FRASE CORTA DEL VIDEO]»
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- ---------- Reseñas escritas ----------
+             Copia el texto tal como lo escribió la clienta (puedes corregir tildes, no el sentido).
+             Nombre + inicial del apellido. Ajusta las estrellas y el aria-label a la calificación real. -->
+        <h3 class="mt-14 text-center font-serif text-headline-sm text-navy lg:mt-20 lg:text-headline-md">Lo que dicen de Alfela</h3>
+        <div class="mt-6 grid gap-4 md:grid-cols-3 md:gap-6 lg:mt-8 lg:gap-8">
+          <figure class="flex flex-col rounded-card bg-white p-5 shadow-sm lg:p-7" data-pending>
+            <p class="flex text-gold" role="img" aria-label="5 de 5 estrellas">
+              <svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg>
+            </p>
+            <blockquote class="mt-3 flex-grow font-serif text-[17px] leading-relaxed text-navy">«[RESEÑA TAL COMO LA ESCRIBIÓ LA CLIENTA]»</blockquote>
+            <figcaption class="mt-5 flex items-center gap-3 border-t border-navy/10 pt-4">
+              <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sand font-serif font-bold text-navy" aria-hidden="true">A</span><!-- inicial del nombre -->
+              <span>
+                <span class="block text-body-sm font-bold text-navy">[NOMBRE Y INICIAL]</span>
+                <span class="block text-xs text-navy/80">[CIUDAD] · Compró [PRODUCTO]</span>
+              </span>
+            </figcaption>
+          </figure>
+          <figure class="flex flex-col rounded-card bg-white p-5 shadow-sm lg:p-7" data-pending>
+            <p class="flex text-gold" role="img" aria-label="5 de 5 estrellas">
+              <svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg>
+            </p>
+            <blockquote class="mt-3 flex-grow font-serif text-[17px] leading-relaxed text-navy">«[RESEÑA TAL COMO LA ESCRIBIÓ LA CLIENTA]»</blockquote>
+            <figcaption class="mt-5 flex items-center gap-3 border-t border-navy/10 pt-4">
+              <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sand font-serif font-bold text-navy" aria-hidden="true">A</span><!-- inicial del nombre -->
+              <span>
+                <span class="block text-body-sm font-bold text-navy">[NOMBRE Y INICIAL]</span>
+                <span class="block text-xs text-navy/80">[CIUDAD] · Compró [PRODUCTO]</span>
+              </span>
+            </figcaption>
+          </figure>
+          <figure class="flex flex-col rounded-card bg-white p-5 shadow-sm lg:p-7" data-pending>
+            <p class="flex text-gold" role="img" aria-label="5 de 5 estrellas">
+              <svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg><svg class="icon text-[18px]" aria-hidden="true" focusable="false"><use href="#i-star-fill"/></svg>
+            </p>
+            <blockquote class="mt-3 flex-grow font-serif text-[17px] leading-relaxed text-navy">«[RESEÑA TAL COMO LA ESCRIBIÓ LA CLIENTA]»</blockquote>
+            <figcaption class="mt-5 flex items-center gap-3 border-t border-navy/10 pt-4">
+              <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sand font-serif font-bold text-navy" aria-hidden="true">A</span><!-- inicial del nombre -->
+              <span>
+                <span class="block text-body-sm font-bold text-navy">[NOMBRE Y INICIAL]</span>
+                <span class="block text-xs text-navy/80">[CIUDAD] · Compró [PRODUCTO]</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <p class="mx-auto mt-8 max-w-2xl text-center text-body-sm text-navy/80 lg:mt-12">
+          Los resultados varían según tu tono de piel, la preparación y el número de aplicaciones.
+          Publicamos fotos, videos y reseñas con autorización de nuestras clientas.
+        </p>
+
+        <!-- Recolector de contenido: invita a nuevas clientas a mandar su resultado -->
+        <p class="mt-4 text-center">
+          <!-- PLACEHOLDER [NÚMERO] -->
+          <a class="pressable inline-flex min-h-11 items-center gap-2 rounded-full bg-sand px-5 py-2 text-body-sm font-bold text-navy hover:bg-sky/40"
+             href="https://wa.me/57[NÚMERO]?text=Hola%20Alfela%2C%20quiero%20compartir%20mi%20resultado"
+             target="_blank" rel="noopener noreferrer">
+            <svg class="icon text-[18px] text-gold-dark" aria-hidden="true" focusable="false"><use href="#i-photo_camera"/></svg>
+            ¿Ya probaste Duna? Mándanos tu antes y después
+            <span class="sr-only">(se abre en una pestaña nueva)</span>
+          </a>
+        </p>
       </div>
     </section>
 
@@ -563,6 +923,103 @@
     </section>
 
     <!-- ==================================================================
+         PREGUNTAS FRECUENTES (#faq)
+         `npm run build` genera el JSON-LD FAQPage a partir de estos <details>:
+         edita las preguntas solo aquí. Las que tengan data-pending no se
+         muestran ni entran al schema.
+         Estructura obligatoria por pregunta (la lee el build):
+           <details class="faq-item"> <summary><span>PREGUNTA</span>…</summary> <div class="faq-a">RESPUESTA</div> </details>
+         ================================================================== -->
+    <section id="faq" class="bg-sand/50 py-10 lg:py-24" aria-labelledby="faq-title">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-12">
+        <div class="text-center">
+          <p class="eyebrow tracking-[0.18em]">Preguntas frecuentes</p>
+          <h2 id="faq-title" class="h-section mt-2">Todo lo que quieres saber <span class="accent text-[34px] lg:text-headline-lg">antes de dorarte</span></h2>
+        </div>
+
+        <div class="mt-8 flex flex-col gap-3 lg:mt-12">
+          <details class="faq-item">
+            <summary><span>¿Duna me protege del sol?</span><svg class="icon faq-chevron" aria-hidden="true" focusable="false"><use href="#i-expand_more"/></svg></summary>
+            <div class="faq-a">
+              <p>No. Duna te da color, pero no es un protector solar ni reemplaza su uso. Aunque luzcas bronceada, tu piel sigue necesitando protector todos los días, sobre todo si vas a estar al aire libre.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>¿Voy a quedar naranja?</span><svg class="icon faq-chevron" aria-hidden="true" focusable="false"><use href="#i-expand_more"/></svg></summary>
+            <div class="faq-a">
+              <p>Duna es progresiva: el color se construye poco a poco, aplicación tras aplicación, así tú decides hasta dónde llegar. Para un tono parejo, empieza con la piel limpia y seca y aplícala con el guante Glowe en movimientos circulares.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>¿Cuánto tarda en aparecer el color y cuánto dura?</span><svg class="icon faq-chevron" aria-hidden="true" focusable="false"><use href="#i-expand_more"/></svg></summary>
+            <div class="faq-a">
+              <!-- PENDIENTE: cuando el laboratorio confirme los tiempos, añade horas de desarrollo y días de duración -->
+              <p>El color se desarrolla de forma gradual en las horas siguientes a la aplicación. Como el bronceado sin sol se queda en la capa más externa de la piel, se desvanece de forma natural a medida que tu piel se renueva. Para mantenerlo, repite la aplicación según las indicaciones del empaque.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>¿Mancha la ropa o las sábanas?</span><svg class="icon faq-chevron" aria-hidden="true" focusable="false"><use href="#i-expand_more"/></svg></summary>
+            <div class="faq-a">
+              <p>Deja que Duna se absorba por completo antes de vestirte y usa ropa holgada las primeras horas. Si la aplicas con las manos, lávalas bien al terminar; con Glowe te ahorras ese paso.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>¿Puedo usarla si tengo la piel sensible?</span><svg class="icon faq-chevron" aria-hidden="true" focusable="false"><use href="#i-expand_more"/></svg></summary>
+            <div class="faq-a">
+              <p>Antes de la primera aplicación haz una prueba en una zona pequeña, como el antebrazo, y espera 24 horas. Si notas enrojecimiento o picazón, no la uses. No la apliques sobre heridas ni sobre piel irritada.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>¿Cómo funciona Tan Alfela y qué talla elijo?</span><svg class="icon faq-chevron" aria-hidden="true" focusable="false"><use href="#i-expand_more"/></svg></summary>
+            <div class="faq-a">
+              <p>Pega el bikini adhesivo sobre la piel limpia y seca antes de aplicar Duna: la zona cubierta queda sin color y aparecen tus marquitas, sin rayos UV. Tiene líneas de corte en tres tallas para adaptar la silueta a tu cuerpo:</p>
+              <ul>
+                <li><strong>XS:</strong> líneas ultra-delgadas, para un efecto sutil.</li>
+                <li><strong>S:</strong> la marca de bikini clásica y equilibrada.</li>
+                <li><strong>M:</strong> cobertura más amplia, para contrastes marcados.</li>
+              </ul>
+            </div>
+          </details>
+
+          <!-- PLACEHOLDER [NSO-DUNA]: quitar data-pending cuando tengas el número -->
+          <details class="faq-item" data-pending>
+            <summary><span>¿Duna tiene registro INVIMA?</span><svg class="icon faq-chevron" aria-hidden="true" focusable="false"><use href="#i-expand_more"/></svg></summary>
+            <div class="faq-a">
+              <p>Sí. Duna cuenta con Notificación Sanitaria Obligatoria (NSO) del INVIMA número <strong>[NSO-DUNA]</strong>, el permiso que exige la ley para vender cosméticos en Colombia. Puedes verificarla en la consulta de registros de la <a href="https://www.invima.gov.co/" target="_blank" rel="noopener noreferrer">página del INVIMA</a>. Tan Alfela y Glowe son accesorios, no cosméticos, así que no la necesitan.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>¿Hacen envíos a toda Colombia?</span><svg class="icon faq-chevron" aria-hidden="true" focusable="false"><use href="#i-expand_more"/></svg></summary>
+            <div class="faq-a">
+              <p>Sí, enviamos a todo el país. El tiempo de entrega y el costo dependen de tu ciudad, y te los confirmamos antes de que pagues. Lee los detalles en <a href="envios-devoluciones.html">Envíos y devoluciones</a>.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>¿Cómo puedo pagar?</span><svg class="icon faq-chevron" aria-hidden="true" focusable="false"><use href="#i-expand_more"/></svg></summary>
+            <div class="faq-a">
+              <!-- Actualizar cuando se conecte la pasarela de pago (medios aceptados) -->
+              <p>Haz tu pedido desde esta página o por WhatsApp y te compartimos los medios de pago disponibles. Antes de pagar recibes un resumen con productos, envío y total.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>¿Puedo devolver un producto?</span><svg class="icon faq-chevron" aria-hidden="true" focusable="false"><use href="#i-expand_more"/></svg></summary>
+            <div class="faq-a">
+              <p>Si tu pedido llega con un defecto o no corresponde a lo que compraste, escríbenos y lo solucionamos. Puedes retractarte de la compra dentro de los 5 días hábiles siguientes a la entrega si el producto sigue sellado. Por higiene, no recibimos cosméticos abiertos o usados, salvo por defecto de calidad. Lee la política completa en <a href="envios-devoluciones.html">Envíos y devoluciones</a>.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
          CTA WHATSAPP
          ================================================================== -->
     <section class="bg-cream py-12 text-center lg:py-24" aria-labelledby="cta-title">
@@ -585,7 +1042,7 @@
           <span class="sr-only">(se abre en una pestaña nueva)</span>
         </a>
 
-        <ul class="mt-6 flex flex-col items-center gap-2 text-body-sm text-navy/80 sm:flex-row sm:gap-6 lg:mt-12">
+        <ul class="mt-6 flex flex-col items-center gap-2 text-body-sm text-navy/80 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 lg:mt-12">
           <li class="inline-flex items-center gap-1.5">
             <svg class="icon text-[18px] text-navy" aria-hidden="true" focusable="false"><use href="#i-local_shipping"/></svg>
             Envíos rápidos a toda Colombia
@@ -594,11 +1051,26 @@
             <svg class="icon text-[18px] text-navy" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg>
             Pagos seguros en línea
           </li>
+          <!-- PLACEHOLDER [NSO-DUNA]: quitar data-pending cuando tengas el número -->
+          <li class="inline-flex items-center gap-1.5" data-pending>
+            <svg class="icon text-[18px] text-navy" aria-hidden="true" focusable="false"><use href="#i-verified"/></svg>
+            NSO INVIMA [NSO-DUNA]
+          </li>
         </ul>
       </div>
     </section>
 
   </main>
+
+  <!-- Prueba A/B "orden" · b: el kit sube justo después del hero. Se mueve el DOM (no solo el CSS)
+       para que el orden de lectura y de tabulación coincida con lo que se ve. -->
+  <script>
+    (function () {
+      if (document.documentElement.getAttribute('data-ab-orden') !== 'b') return;
+      var kit = document.getElementById('kit'), hero = document.getElementById('hero');
+      if (kit && hero) hero.parentNode.insertBefore(kit, hero.nextElementSibling);
+    })();
+  </script>
 
   <!-- ====================================================================
        FOOTER
@@ -632,10 +1104,8 @@
           </div>
           <div class="flex flex-col">
             <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.16em] text-sky md:mb-3 md:text-eyebrow">Soporte</p>
-            <!-- PLACEHOLDER: enlazar a la página de envíos y devoluciones -->
-            <a class="footer-link" href="#">Envíos y devoluciones</a>
-            <!-- PLACEHOLDER: enlazar a la página de preguntas frecuentes -->
-            <a class="footer-link" href="#">Preguntas frecuentes</a>
+            <a class="footer-link" href="envios-devoluciones.html">Envíos y devoluciones</a>
+            <a class="footer-link" href="#faq">Preguntas frecuentes</a>
             <!-- PLACEHOLDER [NÚMERO] -->
             <a class="footer-link" href="https://wa.me/57[NÚMERO]?text=Hola%20Alfela%2C%20quiero%20info%20de%20sus%20productos" target="_blank" rel="noopener noreferrer" data-whatsapp-link>Contacto WhatsApp</a>
           </div>
@@ -645,16 +1115,31 @@
             <a class="footer-link" href="https://www.instagram.com/[USUARIO_INSTAGRAM]/" target="_blank" rel="noopener noreferrer">
               <svg class="icon text-base" aria-hidden="true" focusable="false"><use href="#i-photo_camera"/></svg><span>Instagram</span>
             </a>
-            <!-- PLACEHOLDER: enlazar al formulario del boletín -->
-            <a class="footer-link" href="#">
+            <!-- Embudo: enlace muerto (href="#"). Oculto hasta que exista el formulario del boletín:
+                 pon la URL y quita hidden (y actualiza la sección 7 de privacidad.html) -->
+            <a class="footer-link" href="#" hidden>
               <svg class="icon text-base" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span>Boletín Dorado</span>
             </a>
           </div>
         </nav>
       </div>
 
-      <div class="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-[12px] text-sand/80 sm:flex-row md:text-body-sm">
-        <p>© 2026 Alfela · Colombia. Todos los derechos reservados.</p>
+      <!-- Legales (Ley 1480 de 2011, art. 50: información del vendedor y condiciones visibles) -->
+      <ul class="flex flex-wrap justify-center gap-x-6 border-t border-white/10 pt-4 md:justify-start md:pt-6">
+        <li><a class="footer-link" href="terminos.html">Términos y condiciones</a></li>
+        <li><a class="footer-link" href="privacidad.html">Política de privacidad</a></li>
+        <li><a class="footer-link" href="envios-devoluciones.html#retracto">Derecho de retracto</a></li>
+        <!-- analytics.js lo muestra solo si hay algún ID de analítica configurado -->
+        <li hidden data-cookie-prefs-item><button type="button" class="footer-link" data-cookie-prefs>Preferencias de cookies</button></li>
+        <li><a class="footer-link" href="https://www.sic.gov.co/" target="_blank" rel="noopener noreferrer">Superintendencia de Industria y Comercio<span class="sr-only"> (se abre en una pestaña nueva)</span></a></li>
+      </ul>
+
+      <div class="mt-4 flex flex-col items-center justify-between gap-3 text-center text-[12px] text-sand/80 sm:flex-row sm:text-left md:text-body-sm">
+        <div class="space-y-1">
+          <p>© 2026 Alfela · Colombia. Todos los derechos reservados.</p>
+          <!-- PLACEHOLDER [NSO-DUNA]: quitar data-pending cuando tengas el número -->
+          <p data-pending>Duna · Notificación Sanitaria Obligatoria INVIMA [NSO-DUNA]</p>
+        </div>
         <p class="text-[11px] font-bold uppercase tracking-widest text-sand/70 md:text-eyebrow">Hecho con sol y arena</p>
       </div>
     </div>
@@ -663,14 +1148,20 @@
   <!-- ====================================================================
        BARRA FIJA INFERIOR (solo móvil)
        ==================================================================== -->
-  <nav class="fixed inset-x-0 bottom-0 z-40 bg-cream/90 pb-[env(safe-area-inset-bottom)] shadow-bar backdrop-blur-xl md:hidden" aria-label="Compra rápida">
+  <!-- Animación #1: solo aparece cuando ningún CTA de Duna marcado con data-hides-quickbar
+       (hero y guía de intensidad) está en pantalla. Sin JS se ve siempre. -->
+  <nav data-quickbar class="quickbar fixed inset-x-0 bottom-0 z-40 bg-cream/90 pb-[env(safe-area-inset-bottom)] shadow-bar backdrop-blur-xl md:hidden" aria-label="Compra rápida">
     <div class="flex h-20 items-center justify-between gap-2 px-4">
       <a href="#productos" class="pressable flex h-12 min-w-[52px] flex-col items-center justify-center text-navy/80 hover:text-navy">
         <svg class="icon text-[22px]" aria-hidden="true" focusable="false"><use href="#i-spa"/></svg>
         <span class="mt-0.5 text-[10px] font-bold uppercase tracking-wider">Línea</span>
       </a>
-      <button type="button" class="btn h-12 min-w-0 flex-1 whitespace-nowrap bg-navy px-3 text-[13px] tracking-normal text-white shadow-[0_8px_20px_-4px_rgba(0,37,61,0.35)] min-[380px]:text-label-button min-[380px]:tracking-normal" data-product="duna" data-price="79900">
+      <button data-ab="orden:a" type="button" class="btn h-12 min-w-0 flex-1 whitespace-nowrap bg-navy px-3 text-[13px] tracking-normal text-white shadow-[0_8px_20px_-4px_rgba(0,37,61,0.35)] min-[380px]:text-label-button min-[380px]:tracking-normal" data-product="duna" data-price="79900">
         Comprar Duna · 79.900 COP
+      </button>
+      <!-- Prueba A/B "orden" · b. PLACEHOLDER [PRECIO KIT] en data-price -->
+      <button data-ab="orden:b" type="button" class="btn h-12 min-w-0 flex-1 whitespace-nowrap bg-navy px-3 text-[13px] tracking-normal text-white shadow-[0_8px_20px_-4px_rgba(0,37,61,0.35)] min-[380px]:text-label-button min-[380px]:tracking-normal" data-product="kit" data-price="[PRECIO KIT]">
+        Quiero el kit · 119.900 COP
       </button>
       <a href="#ritual" class="pressable flex h-12 min-w-[52px] flex-col items-center justify-center text-navy/80 hover:text-navy">
         <svg class="icon text-[22px]" aria-hidden="true" focusable="false"><use href="#i-wb_sunny"/></svg>

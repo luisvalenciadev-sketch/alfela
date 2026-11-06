@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 // Tokens de diseño ALFELA (derivados de Stitch · proyecto 8390617209320712874)
 module.exports = {
-  content: ['./index.html', './assets/js/**/*.js'],
+  content: ['./*.html', './assets/js/**/*.js'],
   // hover: solo en dispositivos con puntero fino (evita el hover "pegado" tras tocar en móvil)
   future: { hoverOnlyWhenSupported: true },
   theme: {
